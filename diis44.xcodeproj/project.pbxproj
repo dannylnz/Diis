@@ -8,20 +8,34 @@
 
 /* Begin PBXBuildFile section */
 		64B99E95215AF0780040E12A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B99E94215AF0780040E12A /* AppDelegate.swift */; };
-		64B99E97215AF0780040E12A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B99E96215AF0780040E12A /* ViewController.swift */; };
-		64B99E9A215AF0780040E12A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64B99E98215AF0780040E12A /* Main.storyboard */; };
+		64B99E97215AF0780040E12A /* Discover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B99E96215AF0780040E12A /* Discover.swift */; };
 		64B99E9C215AF07E0040E12A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64B99E9B215AF07E0040E12A /* Assets.xcassets */; };
 		64B99E9F215AF07E0040E12A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64B99E9D215AF07E0040E12A /* LaunchScreen.storyboard */; };
+		64B99EA7215AF2770040E12A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 64B99EA6215AF2770040E12A /* GoogleService-Info.plist */; };
+		64B99EAA215BB78D0040E12A /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B99EA9215BB78D0040E12A /* extensions.swift */; };
+		64B99EAC215BBC610040E12A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B99EAB215BBC610040E12A /* TabBarController.swift */; };
+		64B99EB1215BE79C0040E12A /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B99EB0215BE79C0040E12A /* Structs.swift */; };
+		64B99EB4215BFD6B0040E12A /* picksCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B99EB3215BFD6B0040E12A /* picksCell.swift */; };
+		64B99EB6215C0B450040E12A /* CategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B99EB5215C0B450040E12A /* CategoryVC.swift */; };
+		D4C22EC8347F4BB1F74CB972 /* Pods_diis44.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A677F02A93CE5BF350D0DDE3 /* Pods_diis44.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0886936400C234D20A013AE2 /* Pods-diis44.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-diis44.release.xcconfig"; path = "Pods/Target Support Files/Pods-diis44/Pods-diis44.release.xcconfig"; sourceTree = "<group>"; };
 		64B99E91215AF0780040E12A /* diis44.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = diis44.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64B99E94215AF0780040E12A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		64B99E96215AF0780040E12A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		64B99E99215AF0780040E12A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		64B99E96215AF0780040E12A /* Discover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discover.swift; sourceTree = "<group>"; };
 		64B99E9B215AF07E0040E12A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		64B99E9E215AF07E0040E12A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		64B99EA0215AF07E0040E12A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		64B99EA6215AF2770040E12A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		64B99EA9215BB78D0040E12A /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
+		64B99EAB215BBC610040E12A /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		64B99EB0215BE79C0040E12A /* Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structs.swift; sourceTree = "<group>"; };
+		64B99EB3215BFD6B0040E12A /* picksCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = picksCell.swift; sourceTree = "<group>"; };
+		64B99EB5215C0B450040E12A /* CategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryVC.swift; sourceTree = "<group>"; };
+		A677F02A93CE5BF350D0DDE3 /* Pods_diis44.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_diis44.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF3404D7F63899B7AD8B382C /* Pods-diis44.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-diis44.debug.xcconfig"; path = "Pods/Target Support Files/Pods-diis44/Pods-diis44.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4C22EC8347F4BB1F74CB972 /* Pods_diis44.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +55,8 @@
 			children = (
 				64B99E93215AF0780040E12A /* diis44 */,
 				64B99E92215AF0780040E12A /* Products */,
+				65D7A367A60FAFD39687AEF1 /* Pods */,
+				D1786B83C46C0E85FB06576E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,13 +72,59 @@
 			isa = PBXGroup;
 			children = (
 				64B99E94215AF0780040E12A /* AppDelegate.swift */,
-				64B99E96215AF0780040E12A /* ViewController.swift */,
-				64B99E98215AF0780040E12A /* Main.storyboard */,
-				64B99E9B215AF07E0040E12A /* Assets.xcassets */,
+				64B99EA6215AF2770040E12A /* GoogleService-Info.plist */,
 				64B99E9D215AF07E0040E12A /* LaunchScreen.storyboard */,
 				64B99EA0215AF07E0040E12A /* Info.plist */,
+				64B99E9B215AF07E0040E12A /* Assets.xcassets */,
+				64B99EA9215BB78D0040E12A /* extensions.swift */,
+				64B99EAF215BE7900040E12A /* M */,
+				64B99EA8215AF27F0040E12A /* C */,
 			);
 			path = diis44;
+			sourceTree = "<group>";
+		};
+		64B99EA8215AF27F0040E12A /* C */ = {
+			isa = PBXGroup;
+			children = (
+				64B99EB2215BFD550040E12A /* Cells */,
+				64B99E96215AF0780040E12A /* Discover.swift */,
+				64B99EAB215BBC610040E12A /* TabBarController.swift */,
+				64B99EB5215C0B450040E12A /* CategoryVC.swift */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		64B99EAF215BE7900040E12A /* M */ = {
+			isa = PBXGroup;
+			children = (
+				64B99EB0215BE79C0040E12A /* Structs.swift */,
+			);
+			path = M;
+			sourceTree = "<group>";
+		};
+		64B99EB2215BFD550040E12A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				64B99EB3215BFD6B0040E12A /* picksCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		65D7A367A60FAFD39687AEF1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CF3404D7F63899B7AD8B382C /* Pods-diis44.debug.xcconfig */,
+				0886936400C234D20A013AE2 /* Pods-diis44.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D1786B83C46C0E85FB06576E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A677F02A93CE5BF350D0DDE3 /* Pods_diis44.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +134,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 64B99EA3215AF07E0040E12A /* Build configuration list for PBXNativeTarget "diis44" */;
 			buildPhases = (
+				3CBF3E811B425A6C73C78695 /* [CP] Check Pods Manifest.lock */,
 				64B99E8D215AF0780040E12A /* Sources */,
 				64B99E8E215AF0780040E12A /* Frameworks */,
 				64B99E8F215AF0780040E12A /* Resources */,
+				7487FDEE7832F8002383B439 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -124,33 +189,87 @@
 			files = (
 				64B99E9F215AF07E0040E12A /* LaunchScreen.storyboard in Resources */,
 				64B99E9C215AF07E0040E12A /* Assets.xcassets in Resources */,
-				64B99E9A215AF0780040E12A /* Main.storyboard in Resources */,
+				64B99EA7215AF2770040E12A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3CBF3E811B425A6C73C78695 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-diis44-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7487FDEE7832F8002383B439 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-diis44/Pods-diis44-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-diis44/Pods-diis44-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		64B99E8D215AF0780040E12A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64B99E97215AF0780040E12A /* ViewController.swift in Sources */,
+				64B99EB6215C0B450040E12A /* CategoryVC.swift in Sources */,
+				64B99E97215AF0780040E12A /* Discover.swift in Sources */,
+				64B99EAC215BBC610040E12A /* TabBarController.swift in Sources */,
 				64B99E95215AF0780040E12A /* AppDelegate.swift in Sources */,
+				64B99EB1215BE79C0040E12A /* Structs.swift in Sources */,
+				64B99EB4215BFD6B0040E12A /* picksCell.swift in Sources */,
+				64B99EAA215BB78D0040E12A /* extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		64B99E98215AF0780040E12A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				64B99E99215AF0780040E12A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		64B99E9D215AF07E0040E12A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -278,6 +397,7 @@
 		};
 		64B99EA4215AF07E0040E12A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF3404D7F63899B7AD8B382C /* Pods-diis44.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -290,12 +410,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Diis.diis44;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		64B99EA5215AF07E0040E12A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0886936400C234D20A013AE2 /* Pods-diis44.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -308,7 +429,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Diis.diis44;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

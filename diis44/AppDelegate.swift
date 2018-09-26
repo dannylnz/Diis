@@ -1,23 +1,31 @@
-//
-//  AppDelegate.swift
-//  diis44
-//
-//  Created by Daniele Lanzetta on 26.09.18.
-//  Copyright © 2018 Daniele Lanzetta. All rights reserved.
-//
-
 import UIKit
+import Firebase
+import FirebaseFirestore
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         // Override point for customization after application launch.
+        FirebaseApp.configure()
+        let db = Firestore.firestore()
+        let settings = db.settings
+        settings.areTimestampsInSnapshotsEnabled = true
+        db.settings = settings
+        let tabBar = TabBarController()
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        let navigationController = UINavigationController(rootViewController: tabBar)
+        window?.rootViewController = navigationController
+       
+
         return true
     }
+
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
