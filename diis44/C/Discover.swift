@@ -4,42 +4,33 @@ import SnapKit
 import FirebaseFirestore
 
 class Discover: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
-
+    
     let mainView = UIScrollView()
     var picksCV:UICollectionView!
     private var picksCategory = [Category]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         downloadPicks { (success, response, error) in
             if success {
                 let pick = response as! Category
                 print(pick)
                 self.picksCategory.append(pick)
                 self.picksCV.reloadData()
-                
             } else if let error = error {
                 print (error)
             }
         }
         setupCollectionView()
         viewSetup()
-       
-        navigationController?.navigationBar.backgroundColor = UIColor.white
-        tabBarController?.title = "Discover"
-        tabBarController?.tabBar.barTintColor = UIColor.white
-        tabBarController?.tabBar.layer.masksToBounds = false
-        tabBarController?.tabBar.layer.shadowColor = UIColor.darkGray.cgColor
-        tabBarController?.tabBar.layer.shadowOpacity = 0.2
-        tabBarController?.tabBar.layer.shadowOffset = CGSize(width: 0, height: -4.5)
-        tabBarController?.tabBar.layer.shadowRadius = 3
+        navBarSetup()
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
+    }
 }
 //view layout
 extension Discover {
-    
     func viewSetup() {
         mainView.backgroundColor = UIColor.white
         view.addSubview(mainView)
@@ -48,7 +39,6 @@ extension Discover {
             make.bottom.equalToSuperview()
             make.width.equalToSuperview()
         }
-        
         picksCV.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.width.equalToSuperview()
@@ -64,9 +54,8 @@ extension Discover {
             make.height.greaterThanOrEqualTo(40)
             make.width.greaterThanOrEqualTo(200)
             make.left.equalTo(mainView).offset(5)
-            make.top.equalTo(picksCV.snp.bottom).offset(1)
+            make.top.equalTo(picksCV.snp.bottom)
         }
-        
     }
 }
 //MARK :- picksCV
@@ -76,7 +65,7 @@ extension Discover {
         //layoutCollectionView
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-         layout.sectionInset = UIEdgeInsetsMake(0, 5, 0, 5)
+        layout.sectionInset = UIEdgeInsetsMake(0, 5, 0, 5)
         layout.minimumLineSpacing = 15.0
         layout.minimumInteritemSpacing = 3.0
         picksCV = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
@@ -86,24 +75,19 @@ extension Discover {
         picksCV.backgroundColor = UIColor.white
         mainView.addSubview(picksCV)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = CGSize(width: 220, height: 70)
+        let size = CGSize(width: 220, height: 100)
         return size
         
     }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return picksCategory.count
-        
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "picksCell", for: indexPath) as! picksCell
-        
- 
         cell.categoryName.text = picksCategory[indexPath.row].categoryName
         cell.image.downloadedFrom(link: picksCategory[indexPath.row].categoryImage)
         cell.backgroundView = cell.image
@@ -119,12 +103,14 @@ extension Discover {
         }
         return cell
     }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        <#code#>
+        
+        let vc = CategoryVC()
+        vc.categoryNameLabel.text = picksCategory[indexPath.row].categoryName
+        vc.CATEGORY_NAME = picksCategory[indexPath.row].category
+        navigationController?.pushViewController(vc, animated: true)
+        
     }
-    
-
 }
 //MARK :- DownloadFunc
 extension Discover {
@@ -138,10 +124,55 @@ extension Discover {
                     let categoryImage = document["categoryImage"] as! String
                     let categoryDescription = document["categoryDescription"] as! String
                     let categoryName = document["categoryName"] as! String
-                    let aCategory = Category(categoryDescription: categoryDescription,categoryImage:categoryImage, categoryName:categoryName)
+                    let category = document.documentID
+                    let aCategory = Category(categoryDescription: categoryDescription,categoryImage:categoryImage, categoryName:categoryName, category: category)
                     completion(true,aCategory,nil)
                 }
             }
         }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// NavBar Setup
+extension Discover {
+    func navBarSetup(){
+        tabBarController?.title = "Discover"
+        tabBarController?.tabBar.barTintColor = UIColor.white
+        tabBarController?.tabBar.layer.masksToBounds = false
+        tabBarController?.tabBar.layer.shadowColor = UIColor.darkGray.cgColor
+        tabBarController?.tabBar.layer.shadowOpacity = 0.2
+        tabBarController?.tabBar.layer.shadowOffset = CGSize(width: 0, height: -4.5)
+        tabBarController?.tabBar.layer.shadowRadius = 3
     }
 }

@@ -160,3 +160,28 @@ extension UIColor {
                        alpha: 1.0)
     }
 }
+extension UIViewController {
+    
+    func setTabBarHidden(_ hidden: Bool, animated: Bool = true, duration: TimeInterval = 0.5) {
+        if self.tabBarController?.tabBar.isHidden != hidden{
+            if animated {
+                //Show the tabbar before the animation in case it has to appear
+                if (self.tabBarController?.tabBar.isHidden)!{
+                    self.tabBarController?.tabBar.isHidden = hidden
+                }
+                if let frame = self.tabBarController?.tabBar.frame {
+                    let factor: CGFloat = hidden ? 1 : -1
+                    let y = frame.origin.y + (frame.size.height * factor)
+                    UIView.animate(withDuration: duration, animations: {
+                        self.tabBarController?.tabBar.frame = CGRect(x: frame.origin.x, y: y, width: frame.width, height: frame.height)
+                    }) { (bool) in
+                        //hide the tabbar after the animation in case ti has to be hidden
+                        if (!(self.tabBarController?.tabBar.isHidden)!){
+                            self.tabBarController?.tabBar.isHidden = hidden
+                        }
+                    }
+                }
+            }
+        }
+}
+}

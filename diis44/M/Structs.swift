@@ -27,6 +27,7 @@ struct Category {
     var categoryDescription:String
     var categoryImage:String
     var categoryName:String
+    var category:String
     
 
     
