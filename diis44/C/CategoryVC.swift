@@ -1,10 +1,11 @@
 import Firebase
 import UIKit
 import FirebaseFirestore
+import ReadMoreTextView
 
 class CategoryVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
 
-    let mainView = UIView()
+    let mainView = UIScrollView()
     let categoryNameLabel = UILabel()
     let categoryCoverImage = UIImageView()
     var booksCollectionView: UICollectionView!
@@ -14,6 +15,7 @@ class CategoryVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
 
     override func viewDidAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
+        tabBarController?.title = ""
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,7 +82,7 @@ extension CategoryVC{
 extension CategoryVC {
     func viewSetup() {
         self.view.addSubview(mainView)
-        mainView.backgroundColor = UIColor.lightGray
+        mainView.backgroundColor = UIColor.white
         mainView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
@@ -89,7 +91,7 @@ extension CategoryVC {
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
             make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left)
             make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right)
-            booksCollectionView.backgroundColor = UIColor.red
+
         }
         
         
@@ -154,28 +156,49 @@ extension CategoryVC {
             make.width.equalTo(70)
             make.height.equalTo(120)
             make.centerY.equalTo(cell.snp.centerY)
-            make.left.equalToSuperview().offset(12)
+            make.left.equalToSuperview().offset(22)
         }
         cell.image.downloadedFrom(link: books[indexPath.row].coverImage)
         //cell - Title
         cell.title.snp.makeConstraints { (make) in
-            make.left.equalTo(cell.image.snp.right).offset(5)
-            make.top.equalTo(cell.image.snp.top).offset(-5)
-            make.width.greaterThanOrEqualTo(cell.snp.width).dividedBy(2)
+            make.left.equalTo(cell.image.snp.right).offset(10)
+            make.top.equalTo(cell.image.snp.top).offset(15)
+            make.width.lessThanOrEqualTo(100)
             make.height.lessThanOrEqualTo(40)
         }
         cell.title.text = books[indexPath.row].title
         // cell - Author
           cell.author.snp.makeConstraints { (make) in
-            make.left.equalTo(cell.image.snp.right).offset(5)
+            make.left.equalTo(cell.image.snp.right).offset(10)
             make.top.equalTo(cell.title.snp.bottom).offset(1)
-            make.width.greaterThanOrEqualTo(cell.snp.width).dividedBy(2)
-            make.height.lessThanOrEqualTo(30)
+            make.width.lessThanOrEqualTo(100)
+            make.height.lessThanOrEqualTo(25)
         }
         cell.author.text = books[indexPath.row].author
         
+        // Cell Shadow
+        cell.layer.shadowColor = UIColor.gray.cgColor
+        cell.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+        cell.layer.shadowRadius = 2.0
+        cell.layer.shadowOpacity = 1.0
+        cell.layer.masksToBounds = false
+        cell.layer.shadowPath = UIBezierPath(roundedRect:cell.bounds, cornerRadius:cell.contentView.layer.cornerRadius).cgPath
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = BookVC()
+        vc.hidesBottomBarWhenPushed = true
+        vc.book = books[indexPath.row]
+        vc.ImageLink = books[indexPath.row].coverImage
+        vc.bookAuthor = books[indexPath.row].author
+        vc.bookTitle = books[indexPath.row].title
+        vc.bookPlot = books[indexPath.row].plot
+        vc.tabBarController?.title? = ""
+        vc.CATEGORY_NAME = CATEGORY_NAME
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     

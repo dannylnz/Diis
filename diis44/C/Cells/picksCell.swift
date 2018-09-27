@@ -14,7 +14,7 @@ class picksCell: UICollectionViewCell {
             let label = UILabel()
             label.textAlignment = .center
             label.textColor = UIColor.white
-            label.font = UIFont.boldSystemFont(ofSize: 30.0)
+            label.font = UIFont(name: "Avenir-Heavy", size: 25.0)
             label.lineBreakMode = .byWordWrapping
             label.numberOfLines = 0
             return label

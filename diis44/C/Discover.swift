@@ -27,6 +27,7 @@ class Discover: UIViewController,UICollectionViewDelegate,UICollectionViewDataSo
     }
     override func viewDidAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = false
+        tabBarController?.title = "Discover"
     }
 }
 //view layout
@@ -48,7 +49,7 @@ extension Discover {
         mainView.addSubview(popularStoriesLabel)
         popularStoriesLabel.text = "Popular Stories"
         popularStoriesLabel.textAlignment = .left
-        popularStoriesLabel.font = UIFont.systemFont(ofSize: 16.0)
+        popularStoriesLabel.font = UIFont(name: "Avenir", size: 16.0)
         popularStoriesLabel.textColor = UIColor.black
         popularStoriesLabel.snp.makeConstraints { (make) in
             make.height.greaterThanOrEqualTo(40)
@@ -108,6 +109,7 @@ extension Discover {
         let vc = CategoryVC()
         vc.categoryNameLabel.text = picksCategory[indexPath.row].categoryName
         vc.CATEGORY_NAME = picksCategory[indexPath.row].category
+        vc.tabBarController?.title = picksCategory[indexPath.row].categoryName
         navigationController?.pushViewController(vc, animated: true)
         
     }

@@ -1,5 +1,5 @@
 //
-//  bookCell.swift
+//  chapterCell.swift
 //  diis44
 //
 //  Created by Daniele Lanzetta on 27.09.18.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-class bookCell: UICollectionViewCell {
-    var title:UILabel = {
+class chapterCell: UICollectionViewCell {
+    var chapterTitle:UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.textColor = UIColor.black
@@ -19,7 +19,7 @@ class bookCell: UICollectionViewCell {
         return label
     }()
     
-    var author:UILabel = {
+    var chapterSubtitle:UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont(name: "Avenir", size: 14.0)
@@ -27,23 +27,5 @@ class bookCell: UICollectionViewCell {
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
         return label
-    }()
-    
-    var plot:UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont(name: "Avenir-Light", size: 14.0)
-        label.textColor = UIColor.black
-        label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 0
-        return label
-    }()
-    
-    var image:UIImageView = {
-        let image = UIImageView()
-        image.frame.size.height = 100
-        image.frame.size.width = 60
-        image.contentMode = .scaleAspectFill
-        return image
     }()
 }
