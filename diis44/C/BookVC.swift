@@ -22,46 +22,14 @@ class BookVC: UIViewController,UICollectionViewDelegate,UICollectionViewDelegate
     var book:Book?
     
     override func viewDidLoad() {
-        
-        
         super.viewDidLoad()
-        bar()
-        downloadChapters { (success, response, error) in
-            if success {
-                let chapter = response as! Chapter
-                self.chapters.append(chapter)
-                self.chaptersCV.reloadData()
-            } else if let error = error {
-                print (error)
-            }
-        }
-        
-        //download chapter
-        let url = URL(string: "https://firebasestorage.googleapis.com/v0/b/login-users-with-firebase.appspot.com/o/Capitolo%201%20(2018.09.27-13.02.09Z).epub?alt=media&token=d8ac3fa6-d023-4485-9ee4-941c5c9250cc")!
-        
-
-        
-        
-        
+        //setupView
         setupCollectionView()
         viewSetup()
     }
-    
-    func bar() {
-        if let url = URL(string: "https://firebasestorage.googleapis.com/v0/b/login-users-with-firebase.appspot.com/o/Capitolo%201%20(2018.09.27-13.02.09Z).epub?alt=media&token=d8ac3fa6-d023-4485-9ee4-941c5c9250cc") {
-          
-            Downloader.loadFileAsync(url: url) { (success, error) in
-                if (success != nil) {
-                    print("this is:")
-                    print(success!)
-                } else {
-                    print (error)
-                }
-            }
-
-        }
+    override func viewDidAppear(_ animated: Bool) {
+         tabBarController?.tabBar.isHidden = true
     }
-    
 }
 
 //ViewSetup
@@ -72,14 +40,14 @@ extension BookVC {
         self.view.addSubview(mainView)
         
         mainView.snp.updateConstraints { (make) in
-            make.top.equalTo(view.snp.top)
-            make.bottom.equalToSuperview()
+            make.top.equalTo(self.view.snp.top)
+            make.bottom.equalTo(self.view.snp.bottom)
             make.width.equalToSuperview()
         }
         //image
         mainView.addSubview(bookImage)
         bookImage.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(-70)
+            make.top.equalTo(self.mainView.safeAreaLayoutGuide.snp.top).offset(10)
             make.width.equalTo(100)
             make.height.equalTo(200)
             make.centerX.equalTo(mainView.snp.centerX)
@@ -190,7 +158,12 @@ extension BookVC{
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = readerVC()
         
+        navigationController?.navigationBar.backgroundColor = UIColor.white
+        navigationController?.navigationItem.backBarButtonItem?.title = "<"
+        navigationController?.navigationItem.backBarButtonItem?.tintColor = UIColor.black
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -207,10 +180,7 @@ extension BookVC{
                     let chapter = chapter["chapter"] as! String
                     let chapterRoot = db.collectionID
                     let aChapter = Chapter(title: chapterTitle, value: chapter, root:chapterRoot)
-                    
-
-                    
-                    
+   
                     completion(true,aChapter,nil)
                 }
             }

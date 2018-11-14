@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Sets the translucent background color
         UINavigationBar.appearance().backgroundColor = .clear
         // Set translucent. (Default value is already true, so this can be removed if desired.)
-        UINavigationBar.appearance().isTranslucent = true
+        UINavigationBar.appearance().tintColor = UIColor.lightGray
         FirebaseApp.configure()
         let db = Firestore.firestore()
         let settings = db.settings
@@ -24,12 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         db.settings = settings
         let tabBar = TabBarController()
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.makeKeyAndVisible()
         let navigationController = UINavigationController(rootViewController: tabBar)
         navigationController.navigationBar.prefersLargeTitles = true
         window?.rootViewController = navigationController
-       
-
+        navigationController.isNavigationBarHidden = true
+        window?.makeKeyAndVisible()
         return true
     }
 

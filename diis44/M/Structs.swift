@@ -40,8 +40,6 @@ struct Chapter {
     var root:String
 
     
-    
-    
 }
 class Downloader {
     class func loadFileAsync(url: URL, completion: @escaping (String?, Error?) -> Void)

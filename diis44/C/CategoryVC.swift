@@ -14,12 +14,14 @@ class CategoryVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
 
 
     override func viewDidAppear(_ animated: Bool) {
-        tabBarController?.tabBar.isHidden = true
-        tabBarController?.title = ""
+       tabBarController?.tabBar.isHidden = true
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
+         setTabBarHidden(true, animated: true, duration: 0.2)
+
         downloadBooks { (success, response, error) in
             if success {
                 let book = response as! Book

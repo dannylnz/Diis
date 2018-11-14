@@ -10,6 +10,7 @@ class Discover: UIViewController,UICollectionViewDelegate,UICollectionViewDataSo
     private var picksCategory = [Category]()
     
     override func viewDidLoad() {
+        tabBarController?.tabBar.isHidden = false
         super.viewDidLoad()
         downloadPicks { (success, response, error) in
             if success {
@@ -26,8 +27,9 @@ class Discover: UIViewController,UICollectionViewDelegate,UICollectionViewDataSo
         navBarSetup()
     }
     override func viewDidAppear(_ animated: Bool) {
-        tabBarController?.tabBar.isHidden = false
         tabBarController?.title = "Discover"
+        tabBarController?.tabBar.isHidden = false
+        
     }
 }
 //view layout
@@ -39,6 +41,7 @@ extension Discover {
             make.top.equalTo(view.snp.top)
             make.bottom.equalToSuperview()
             make.width.equalToSuperview()
+            
         }
         picksCV.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
@@ -110,6 +113,7 @@ extension Discover {
         vc.categoryNameLabel.text = picksCategory[indexPath.row].categoryName
         vc.CATEGORY_NAME = picksCategory[indexPath.row].category
         vc.tabBarController?.title = picksCategory[indexPath.row].categoryName
+        UINavigationBar.appearance().isHidden = true
         navigationController?.pushViewController(vc, animated: true)
         
     }
