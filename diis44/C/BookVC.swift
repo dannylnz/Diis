@@ -23,13 +23,27 @@ class BookVC: UIViewController,UICollectionViewDelegate,UICollectionViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //setupView
+        
+        downloadChapters { (success, response, error) in
+            if success {
+                let chapter = response as! Chapter
+                self.chapters.append(chapter)
+                self.chaptersCV.reloadData()
+                } else if let error = error {
+                print (error)
+            }
+            print(self.chapters)
+        }
+        
+    //setupView
         setupCollectionView()
         viewSetup()
     }
+    
     override func viewDidAppear(_ animated: Bool) {
          tabBarController?.tabBar.isHidden = true
     }
+    
 }
 
 //ViewSetup
@@ -38,7 +52,6 @@ extension BookVC {
     
         mainView.backgroundColor = UIColor.white
         self.view.addSubview(mainView)
-        
         mainView.snp.updateConstraints { (make) in
             make.top.equalTo(self.view.snp.top)
             make.bottom.equalTo(self.view.snp.bottom)
@@ -160,6 +173,7 @@ extension BookVC{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = readerVC()
         
+        vc.chapterText = chapters[indexPath.row].value
         navigationController?.navigationBar.backgroundColor = UIColor.white
         navigationController?.navigationItem.backBarButtonItem?.title = "<"
         navigationController?.navigationItem.backBarButtonItem?.tintColor = UIColor.black
@@ -180,7 +194,10 @@ extension BookVC{
                     let chapter = chapter["chapter"] as! String
                     let chapterRoot = db.collectionID
                     let aChapter = Chapter(title: chapterTitle, value: chapter, root:chapterRoot)
-   
+                    
+
+                    
+                    
                     completion(true,aChapter,nil)
                 }
             }

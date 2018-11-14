@@ -10,6 +10,7 @@ class Discover: UIViewController,UICollectionViewDelegate,UICollectionViewDataSo
     private var picksCategory = [Category]()
     
     override func viewDidLoad() {
+        self.title = "Discover"
         tabBarController?.tabBar.isHidden = false
         super.viewDidLoad()
         downloadPicks { (success, response, error) in
@@ -28,8 +29,8 @@ class Discover: UIViewController,UICollectionViewDelegate,UICollectionViewDataSo
     }
     override func viewDidAppear(_ animated: Bool) {
         tabBarController?.title = "Discover"
-        tabBarController?.tabBar.isHidden = false
-        
+//        tabBarController?.tabBar.isHidden = false
+        setTabBarHidden(false, animated: true, duration: 0.2)
     }
 }
 //view layout

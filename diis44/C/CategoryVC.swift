@@ -19,7 +19,6 @@ class CategoryVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
          setTabBarHidden(true, animated: true, duration: 0.2)
 
         downloadBooks { (success, response, error) in
