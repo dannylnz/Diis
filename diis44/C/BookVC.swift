@@ -59,6 +59,7 @@ extension BookVC {
         }
         //image
         mainView.addSubview(bookImage)
+        
         bookImage.snp.makeConstraints { (make) in
             make.top.equalTo(self.mainView.safeAreaLayoutGuide.snp.top).offset(10)
             make.width.equalTo(100)
@@ -66,6 +67,9 @@ extension BookVC {
             make.centerX.equalTo(mainView.snp.centerX)
         }
         bookImage.downloadedFrom(link: (book?.coverImage)!)
+        bookImage.clipsToBounds = true
+        bookImage.layer.cornerRadius = 4.0
+        bookImage.contentMode = .scaleAspectFill
         //book - title
         mainView.addSubview(TitleLbl)
         TitleLbl.text = book?.title

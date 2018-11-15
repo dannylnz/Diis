@@ -153,18 +153,25 @@ extension CategoryVC {
         cell.addSubview(cell.image)
         cell.addSubview(cell.author)
         cell.addSubview(cell.title)
+        
         cell.image.snp.makeConstraints { (make) in
-            make.width.equalTo(70)
+            make.width.equalTo(80)
             make.height.equalTo(120)
             make.centerY.equalTo(cell.snp.centerY)
-            make.left.equalToSuperview().offset(22)
+            make.left.equalToSuperview().offset(10)
+            
         }
+        
         cell.image.downloadedFrom(link: books[indexPath.row].coverImage)
+        cell.image.clipsToBounds = true
+        cell.image.layer.cornerRadius = 4.0
+        cell.image.contentMode = .scaleAspectFill
+        
         //cell - Title
         cell.title.snp.makeConstraints { (make) in
             make.left.equalTo(cell.image.snp.right).offset(10)
             make.top.equalTo(cell.image.snp.top).offset(15)
-            make.width.lessThanOrEqualTo(100)
+            make.width.greaterThanOrEqualTo(100)
             make.height.lessThanOrEqualTo(40)
         }
         cell.title.text = books[indexPath.row].title

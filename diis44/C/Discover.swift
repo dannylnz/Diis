@@ -68,7 +68,7 @@ extension Discover {
         mainView.addSubview(popularStoriesLabel)
         popularStoriesLabel.text = "Popular Stories"
         popularStoriesLabel.textAlignment = .left
-        popularStoriesLabel.font = UIFont(name: "Avenir", size: 16.0)
+        popularStoriesLabel.font = UIFont(name: "Avenir", size: 18.0)
         popularStoriesLabel.textColor = UIColor.black
         popularStoriesLabel.snp.makeConstraints { (make) in
             make.height.greaterThanOrEqualTo(40)
