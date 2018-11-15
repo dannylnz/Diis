@@ -8,6 +8,7 @@ class readerVC:UIViewController,NSLayoutManagerDelegate {
     var fontBtn = UIButton()
     var chapterText = ""
     var fontSize:CGFloat = 21.0
+    let fontMenu = fontSettingsView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +21,9 @@ class readerVC:UIViewController,NSLayoutManagerDelegate {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: fontIcon  , style: .plain, target: self, action: #selector(fontChangingBtn))
 
         let scrollingView = UIScrollView(frame: CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(view.bounds.size.width - 30), height: CGFloat(view.bounds.size.height - 100)))
-
+        
+        fontMenu.isHidden = true
+        
         // we will set the contentSize after determining how many pages get filled with text
         //scrollingView.contentSize = CGSize(width: CGFloat((view.bounds.size.width - 20) * pageNumber), height: CGFloat(view.bounds.size.height - 20))
         scrollingView.backgroundColor = UIColor.white
@@ -70,6 +73,35 @@ class readerVC:UIViewController,NSLayoutManagerDelegate {
     }
     @objc func fontChangingBtn() {
         
+        
+        switch fontMenu.isHidden {
+        case true:
+        
+        self.view.bringSubview(toFront: fontMenu)
+        
+        self.fontMenu.isHidden = false
+        fontMenu.commonInit()
+        
+        self.fontMenu.snp.makeConstraints { (make) in
+            make.height.equalToSuperview().dividedBy(2).offset(-100)
+            make.width.equalToSuperview()
+            make.bottom.equalToSuperview()
+            }
+            
+        case false:
+            
+            fontSettingsView.animate(withDuration: 0.7) {
+               
+              self.fontMenu.isHidden = true
+            }
+            
+            
+        default:
+            break
+        }
+
+        
+       
         print ("TODO: Increase or Decrease Font")
     }
     
@@ -77,6 +109,11 @@ class readerVC:UIViewController,NSLayoutManagerDelegate {
         navigationController?.hidesBarsOnTap = false
         navigationController?.navigationBar.barTintColor = UIColor.clear
     }
+    
+}
+
+//MARK:- UIView Font Change / Text / Luminosity / color
+extension readerVC{
     
 }
 
@@ -90,5 +127,8 @@ extension readerVC {
             make.bottom.equalToSuperview()
             make.width.equalToSuperview()
         }
+        self.view.addSubview(fontMenu)
+        
+
     }
 }
