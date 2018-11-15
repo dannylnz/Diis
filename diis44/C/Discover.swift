@@ -37,7 +37,6 @@ class Discover: UIViewController,UICollectionViewDelegate,UICollectionViewDataSo
             }
         }
         
-
         setupCollectionView()
         setupPopularStoriesCollectionView()
         viewSetup()
