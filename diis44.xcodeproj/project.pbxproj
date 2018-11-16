@@ -10,6 +10,8 @@
 		642BBAFD215C48F5000F32F4 /* bookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642BBAFC215C48F5000F32F4 /* bookCell.swift */; };
 		642BBAFF215CD7D2000F32F4 /* BookVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642BBAFE215CD7D2000F32F4 /* BookVC.swift */; };
 		643B724D219DB5A300DF867F /* fontSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643B724C219DB5A300DF867F /* fontSettingsView.swift */; };
+		643B7252219F0C3A00DF867F /* popUpRegistrationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643B7251219F0C3A00DF867F /* popUpRegistrationVC.swift */; };
+		643B7254219F117500DF867F /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643B7253219F117500DF867F /* ProfileVC.swift */; };
 		6480AAA7215D070C00B2EF85 /* chapterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6480AAA6215D070C00B2EF85 /* chapterCell.swift */; };
 		6480AAA9215D2D6900B2EF85 /* readerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6480AAA8215D2D6900B2EF85 /* readerVC.swift */; };
 		64A1B2E1219CB6820095F6B3 /* popularStoriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A1B2E0219CB6810095F6B3 /* popularStoriesCell.swift */; };
@@ -31,6 +33,8 @@
 		642BBAFC215C48F5000F32F4 /* bookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bookCell.swift; sourceTree = "<group>"; };
 		642BBAFE215CD7D2000F32F4 /* BookVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookVC.swift; sourceTree = "<group>"; };
 		643B724C219DB5A300DF867F /* fontSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fontSettingsView.swift; sourceTree = "<group>"; };
+		643B7251219F0C3A00DF867F /* popUpRegistrationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popUpRegistrationVC.swift; sourceTree = "<group>"; };
+		643B7253219F117500DF867F /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		6480AAA6215D070C00B2EF85 /* chapterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chapterCell.swift; sourceTree = "<group>"; };
 		6480AAA8215D2D6900B2EF85 /* readerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = readerVC.swift; sourceTree = "<group>"; };
 		64A1B2E0219CB6810095F6B3 /* popularStoriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popularStoriesCell.swift; sourceTree = "<group>"; };
@@ -71,6 +75,22 @@
 			path = "New Group";
 			sourceTree = "<group>";
 		};
+		643B724F219F0B5900DF867F /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				643B7253219F117500DF867F /* ProfileVC.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		643B7250219F0BFC00DF867F /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				643B7251219F0C3A00DF867F /* popUpRegistrationVC.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		64B99E88215AF0780040E12A = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +127,8 @@
 		64B99EA8215AF27F0040E12A /* C */ = {
 			isa = PBXGroup;
 			children = (
+				643B7250219F0BFC00DF867F /* SignUp */,
+				643B724F219F0B5900DF867F /* Profile */,
 				643B724E219DB5AA00DF867F /* Elements */,
 				64B99EB2215BFD550040E12A /* Cells */,
 				64B99E96215AF0780040E12A /* Discover.swift */,
@@ -304,6 +326,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				643B7254219F117500DF867F /* ProfileVC.swift in Sources */,
 				64A1B2E1219CB6820095F6B3 /* popularStoriesCell.swift in Sources */,
 				64B99EB6215C0B450040E12A /* CategoryVC.swift in Sources */,
 				64B99E97215AF0780040E12A /* Discover.swift in Sources */,
@@ -316,6 +339,7 @@
 				6480AAA9215D2D6900B2EF85 /* readerVC.swift in Sources */,
 				64B99EB1215BE79C0040E12A /* Structs.swift in Sources */,
 				64B99EB4215BFD6B0040E12A /* picksCell.swift in Sources */,
+				643B7252219F0C3A00DF867F /* popUpRegistrationVC.swift in Sources */,
 				64B99EAA215BB78D0040E12A /* extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

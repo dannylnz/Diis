@@ -11,6 +11,7 @@ class BookVC: UIViewController,UICollectionViewDelegate,UICollectionViewDelegate
     var chaptersCV:UICollectionView!
     var bookImage = UIImageView()
     var ImageLink = ""
+    var followBtn = UIButton()
     var TitleLbl = UILabel()
     var bookTitle = ""
     var AuthorLbl = UILabel()
@@ -32,7 +33,7 @@ class BookVC: UIViewController,UICollectionViewDelegate,UICollectionViewDelegate
                 } else if let error = error {
                 print (error)
             }
-            print(self.chapters)
+           
         }
         
     //setupView
@@ -62,7 +63,7 @@ extension BookVC {
         
         bookImage.snp.makeConstraints { (make) in
             make.top.equalTo(self.mainView.safeAreaLayoutGuide.snp.top).offset(10)
-            make.width.equalTo(100)
+            make.width.equalTo(130)
             make.height.equalTo(200)
             make.centerX.equalTo(mainView.snp.centerX)
         }
@@ -70,6 +71,21 @@ extension BookVC {
         bookImage.clipsToBounds = true
         bookImage.layer.cornerRadius = 4.0
         bookImage.contentMode = .scaleAspectFill
+        
+        //FollowBtn
+        followBtn.backgroundColor = .blue
+        followBtn.setTitle("Follow", for: .normal)
+        followBtn.layer.cornerRadius = 4.0
+        followBtn.addTarget(self, action: #selector(followBtnClicked), for: .touchUpInside)
+        mainView.addSubview(followBtn)
+        followBtn.snp.makeConstraints { (make) in
+            make.width.equalTo(bookImage.snp.width)
+            make.height.equalTo(35)
+            make.centerX.equalTo(bookImage.snp.centerX)
+            make.top.equalTo(bookImage.snp.bottom).offset(2)
+        }
+        
+        
         //book - title
         mainView.addSubview(TitleLbl)
         TitleLbl.text = book?.title
@@ -80,7 +96,7 @@ extension BookVC {
             make.height.greaterThanOrEqualTo(30)
             make.width.greaterThanOrEqualTo(200)
             make.centerX.equalTo(bookImage.snp.centerX)
-            make.top.equalTo(bookImage.snp.bottom).offset(5)
+            make.top.equalTo(followBtn.snp.bottom).offset(2)
         }
         //book - author
         mainView.addSubview(AuthorLbl)
@@ -118,6 +134,14 @@ extension BookVC {
             make.bottom.equalTo(mainView.snp.bottom)
             make.width.equalToSuperview()
         }
+        
+    }
+    @objc func followBtnClicked() {
+        
+        let popUp = popUpRegistrationVC()
+        popUp.modalPresentationStyle = .overCurrentContext
+        UINavigationBar.appearance().isHidden = true
+        self.present(popUp, animated: true, completion: nil)
         
     }
 }
