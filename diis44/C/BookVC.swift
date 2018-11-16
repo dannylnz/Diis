@@ -4,6 +4,7 @@ import SnapKit
 import Firebase
 import ReadMoreTextView
 import FirebaseFirestore
+import FirebaseAuth
 
 class BookVC: UIViewController,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource {
 
@@ -39,6 +40,7 @@ class BookVC: UIViewController,UICollectionViewDelegate,UICollectionViewDelegate
     //setupView
         setupCollectionView()
         viewSetup()
+        checkIfUserIsLogged()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -71,6 +73,7 @@ extension BookVC {
         bookImage.clipsToBounds = true
         bookImage.layer.cornerRadius = 4.0
         bookImage.contentMode = .scaleAspectFill
+        bookImage.dropShadow(scale: true)
         
         //FollowBtn
         followBtn.backgroundColor = .blue
@@ -80,9 +83,9 @@ extension BookVC {
         mainView.addSubview(followBtn)
         followBtn.snp.makeConstraints { (make) in
             make.width.equalTo(bookImage.snp.width)
-            make.height.equalTo(35)
+            make.height.equalTo(32)
             make.centerX.equalTo(bookImage.snp.centerX)
-            make.top.equalTo(bookImage.snp.bottom).offset(2)
+            make.top.equalTo(bookImage.snp.bottom).offset(6)
         }
         
         
@@ -96,7 +99,7 @@ extension BookVC {
             make.height.greaterThanOrEqualTo(30)
             make.width.greaterThanOrEqualTo(200)
             make.centerX.equalTo(bookImage.snp.centerX)
-            make.top.equalTo(followBtn.snp.bottom).offset(2)
+            make.top.equalTo(followBtn.snp.bottom).offset(6)
         }
         //book - author
         mainView.addSubview(AuthorLbl)
@@ -141,7 +144,7 @@ extension BookVC {
         let popUp = popUpRegistrationVC()
         popUp.modalPresentationStyle = .overCurrentContext
         UINavigationBar.appearance().isHidden = true
-        self.present(popUp, animated: true, completion: nil)
+        navigationController?.pushViewController(popUp, animated: true)
         
     }
 }
@@ -230,6 +233,52 @@ extension BookVC{
                 }
             }
         }
+    }
+    
+}
+
+extension BookVC {
+    
+    fileprivate func checkIfUserIsLogged() {
+        
+        if Auth.auth().currentUser != nil  {
+            print("user is authenticated")
+            // todo
+        }else {
+            print("user is NOT authenticated")
+            self.anonymousUser()
+        }
+        
+    }
+    
+    
+    fileprivate func anonymousUser(){
+        
+
+            
+            Auth.auth().signInAnonymously() { (authResult, error) in
+            
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                // Save eventual data
+                
+                let user = authResult?.user
+                let isAnonymous = user?.isAnonymous  // true
+                let uid = user?.uid
+                
+                //Browse anonymously
+                // buttons are disabled (following, dummy profile, likes)
+                
+                self.followBtn.backgroundColor = UIColor.lightGray
+                print("and user button is now lightgray")
+                
+                
+                
+            }
+        
+
     }
     
 }

@@ -1,4 +1,15 @@
 import Foundation
+import FirebaseAuth
+
+struct User {
+    
+    var name:String
+    var email:String
+    var bookFollowed:[Book]
+    var uid:FIRAuthSettings
+    
+}
+
 
 struct Book {
     var title:String

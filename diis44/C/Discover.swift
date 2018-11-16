@@ -20,8 +20,6 @@ class Discover: UIViewController,UICollectionViewDelegate,UICollectionViewDataSo
                 let pick = response as! Book
                 self.popularStoriesCategory.append(pick)
                 self.popularStoriesCV.reloadData()
-                print ("This is book:")
-                print(pick)
             } else if let error = error {
                 print (error)
             }
@@ -44,8 +42,8 @@ class Discover: UIViewController,UICollectionViewDelegate,UICollectionViewDataSo
     }
     override func viewDidAppear(_ animated: Bool) {
         tabBarController?.title = "Discover"
-//        tabBarController?.tabBar.isHidden = false
-        setTabBarHidden(false, animated: true, duration: 0.2)
+        tabBarController?.tabBar.isHidden = false
+
     }
 }
 //view layout
@@ -59,10 +57,11 @@ extension Discover {
             make.width.equalToSuperview()
             
         }
+        
         picksCV.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.width.equalToSuperview()
-            make.height.equalTo(100)
+            make.height.equalTo(110)
         }
         let popularStoriesLabel = UILabel()
         mainView.addSubview(popularStoriesLabel)
@@ -79,13 +78,13 @@ extension Discover {
         popularStoriesCV.snp.makeConstraints { (make) in
             make.top.equalTo(popularStoriesLabel.snp.bottom).offset(5)
             make.width.equalToSuperview()
-            make.height.equalTo(200)
+            make.height.equalTo(220)
         }
         let moreToExploreLabel = UILabel()
         mainView.addSubview(moreToExploreLabel)
         moreToExploreLabel.text = "More to Explore"
         moreToExploreLabel.textAlignment = .left
-        moreToExploreLabel.font = UIFont(name: "BodoniSvtyTwoOSITCTT-Bold", size: 23.0)
+        moreToExploreLabel.font = UIFont(name: "BodoniSvtyTwoOSITCTT-Bold", size: 30.0)
         moreToExploreLabel.textColor = UIColor.black
         moreToExploreLabel.snp.makeConstraints { (make) in
             make.height.greaterThanOrEqualTo(40)
@@ -111,6 +110,7 @@ extension Discover {
         picksCV.dataSource = self
         picksCV.delegate = self
         picksCV.tag = 0
+        picksCV.showsHorizontalScrollIndicator = false
         picksCV.register(picksCell.self, forCellWithReuseIdentifier: "picksCell")
         picksCV.backgroundColor = UIColor.white
         mainView.addSubview(picksCV)
@@ -122,7 +122,7 @@ extension Discover {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsetsMake(-25, 10, 0, 10)
-        layout.minimumLineSpacing = 35.0
+        layout.minimumLineSpacing = 10.0
         layout.minimumInteritemSpacing = 35.0
         popularStoriesCV = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         popularStoriesCV.dataSource = self
@@ -141,7 +141,7 @@ extension Discover {
         
         switch collectionView.tag {
         case 0:
-            let size = CGSize(width: 220, height: 100)
+            let size = CGSize(width: 220, height: 110)
             return size
         case 1:
             let size = CGSize(width: 90, height: 160)
@@ -173,10 +173,13 @@ extension Discover {
             cell.categoryName.text = picksCategory[indexPath.row].categoryName
             cell.image.downloadedFrom(link: picksCategory[indexPath.row].categoryImage)
             cell.backgroundView = cell.image
+            cell.dropShadow()
             cell.image.mask?.clipsToBounds = true
             cell.layer.cornerRadius = 4.0
+            cell.image.layer.cornerRadius = 4.0
             cell.addSubview(cell.image)
             cell.addSubview(cell.categoryName)
+
             cell.categoryName.snp.makeConstraints { (make) in
                 make.height.greaterThanOrEqualTo(40)
                 make.width.equalTo(cell.snp.width)
@@ -202,17 +205,17 @@ extension Discover {
                 make.width.equalTo(100)
             }
             cell.bookTitleLbl.snp.makeConstraints { (make) in
-                make.height.greaterThanOrEqualTo(40)
+                make.height.lessThanOrEqualTo(30)
                 make.width.equalTo(cell.snp.width)
                 make.centerX.equalTo(cell.snp.centerX)
-                make.top.equalTo(cell.snp.bottom).offset(-10)
+                make.top.equalTo(cell.snp.bottom).offset(3)
                 
             }
             cell.bookAuthorLbl.snp.makeConstraints { (make) in
-                make.height.greaterThanOrEqualTo(40)
+                make.height.lessThanOrEqualTo(40)
                 make.width.equalTo(cell.snp.width)
                 make.centerX.equalTo(cell.snp.centerX)
-                make.top.equalTo(cell.bookTitleLbl.snp.bottom)
+                make.top.equalTo(cell.bookTitleLbl.snp.bottom).offset(-3)
             }
             return cell
             

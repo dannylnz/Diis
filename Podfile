@@ -7,6 +7,7 @@ target 'diis44' do
 
   # Pods for diis44
   pod 'Firebase/Core'
+  pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'SnapKit'
     pod 'ReadMoreTextView'

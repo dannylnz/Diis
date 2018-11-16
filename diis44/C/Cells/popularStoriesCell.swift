@@ -23,7 +23,7 @@ class popularStoriesCell: UICollectionViewCell {
         var bookAuthorLbl:UILabel = {
             let label = UILabel()
             label.textAlignment = .center
-            label.font = UIFont(name: "SFCompactDisplay-Regular", size: 15.0)
+            label.font = UIFont(name: "Avenir", size: 14.0)
             label.textColor = UIColor.lightGray
             label.lineBreakMode = .byWordWrapping
             label.numberOfLines = 0

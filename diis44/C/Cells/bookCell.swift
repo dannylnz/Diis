@@ -15,7 +15,8 @@ class bookCell: UICollectionViewCell {
         label.textColor = UIColor.black
         label.font = UIFont(name: "Avenir-Heavy", size: 17.0)
         label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 0
+        label.numberOfLines = 2
+        label.sizeToFit()
         return label
     }()
     

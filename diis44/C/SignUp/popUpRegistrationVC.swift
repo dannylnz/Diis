@@ -17,11 +17,13 @@ class popUpRegistrationVC: UIViewController {
     let dismissBtn = UIButton()
     let dismissImage = UIImage(named: "dismiss")
     let onboardingImage = UIImageView()
-    let img = UIImage(named: "onboardingimage")
+    let img = UIImage(named: "signupimg")
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = false
         viewSetup()
+        
     }
     
 }
@@ -85,17 +87,17 @@ extension popUpRegistrationVC{
             make.centerX.equalTo(onboardingImage.snp.centerX)
             make.top.equalTo(facebookBtn.snp.bottom).offset(9)
         }
-        //dismiss Button
-        dismissBtn.setImage(dismissImage, for: .normal)
-        dismissBtn.contentMode = .scaleAspectFill
-        dismissBtn.addTarget(self, action: #selector(dismissBtnClicked), for: .touchUpInside)
-        mainView.addSubview(dismissBtn)
-        dismissBtn.snp.makeConstraints { (make) in
-            make.width.equalTo(20)
-            make.height.equalTo(20)
-            make.right.equalTo(mainView.snp.right).offset(50)
-            make.top.equalTo(mainView.snp.top).offset(70)
-        }
+//        //dismiss Button
+//        dismissBtn.setImage(dismissImage, for: .normal)
+//        dismissBtn.contentMode = .scaleAspectFill
+//        dismissBtn.addTarget(self, action: #selector(dismissBtnClicked), for: .touchUpInside)
+//        mainView.addSubview(dismissBtn)
+//        dismissBtn.snp.makeConstraints { (make) in
+//            make.width.equalTo(20)
+//            make.height.equalTo(20)
+//            make.right.equalTo(mainView.snp.right).offset(50)
+//            make.top.equalTo(mainView.snp.top).offset(70)
+//        }
         
         
         
@@ -103,12 +105,18 @@ extension popUpRegistrationVC{
     
     @objc func facebookBtnClicked() {
         
+        facebookBtn.pulsate()
+       
         //todo
     }
     
     @objc func mailBtnClicked() {
-        
-        //todo
+        mailBtn.pulsate()
+        let signUpVC = SignUpVC()
+        signUpVC.title = "Sign up with your email"
+        signUpVC.modalPresentationStyle = .overCurrentContext
+        UINavigationBar.appearance().isHidden = true
+        navigationController?.pushViewController(signUpVC, animated: true)
     }
     
     @objc func dismissBtnClicked() {

@@ -171,8 +171,8 @@ extension CategoryVC {
         cell.title.snp.makeConstraints { (make) in
             make.left.equalTo(cell.image.snp.right).offset(10)
             make.top.equalTo(cell.image.snp.top).offset(15)
-            make.width.greaterThanOrEqualTo(100)
-            make.height.lessThanOrEqualTo(40)
+            make.right.lessThanOrEqualTo(cell.snp.right).offset(5)
+            make.height.lessThanOrEqualTo(80)
         }
         cell.title.text = books[indexPath.row].title
         // cell - Author

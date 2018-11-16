@@ -12,6 +12,9 @@
 		643B724D219DB5A300DF867F /* fontSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643B724C219DB5A300DF867F /* fontSettingsView.swift */; };
 		643B7252219F0C3A00DF867F /* popUpRegistrationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643B7251219F0C3A00DF867F /* popUpRegistrationVC.swift */; };
 		643B7254219F117500DF867F /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643B7253219F117500DF867F /* ProfileVC.swift */; };
+		643B7258219F306300DF867F /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643B7257219F306300DF867F /* Status.swift */; };
+		643B725A219F3A7200DF867F /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643B7259219F3A7200DF867F /* SignUpVC.swift */; };
+		643B725C219F3D2200DF867F /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643B725B219F3D2200DF867F /* LoginVC.swift */; };
 		6480AAA7215D070C00B2EF85 /* chapterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6480AAA6215D070C00B2EF85 /* chapterCell.swift */; };
 		6480AAA9215D2D6900B2EF85 /* readerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6480AAA8215D2D6900B2EF85 /* readerVC.swift */; };
 		64A1B2E1219CB6820095F6B3 /* popularStoriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A1B2E0219CB6810095F6B3 /* popularStoriesCell.swift */; };
@@ -35,6 +38,10 @@
 		643B724C219DB5A300DF867F /* fontSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fontSettingsView.swift; sourceTree = "<group>"; };
 		643B7251219F0C3A00DF867F /* popUpRegistrationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popUpRegistrationVC.swift; sourceTree = "<group>"; };
 		643B7253219F117500DF867F /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		643B7257219F306300DF867F /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		643B7259219F3A7200DF867F /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		643B725B219F3D2200DF867F /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		643B725F219F82A300DF867F /* diis44.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = diis44.entitlements; sourceTree = "<group>"; };
 		6480AAA6215D070C00B2EF85 /* chapterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chapterCell.swift; sourceTree = "<group>"; };
 		6480AAA8215D2D6900B2EF85 /* readerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = readerVC.swift; sourceTree = "<group>"; };
 		64A1B2E0219CB6810095F6B3 /* popularStoriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popularStoriesCell.swift; sourceTree = "<group>"; };
@@ -87,6 +94,8 @@
 			isa = PBXGroup;
 			children = (
 				643B7251219F0C3A00DF867F /* popUpRegistrationVC.swift */,
+				643B7259219F3A7200DF867F /* SignUpVC.swift */,
+				643B725B219F3D2200DF867F /* LoginVC.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -112,6 +121,7 @@
 		64B99E93215AF0780040E12A /* diis44 */ = {
 			isa = PBXGroup;
 			children = (
+				643B725F219F82A300DF867F /* diis44.entitlements */,
 				64B99E94215AF0780040E12A /* AppDelegate.swift */,
 				64B99EA6215AF2770040E12A /* GoogleService-Info.plist */,
 				64B99E9D215AF07E0040E12A /* LaunchScreen.storyboard */,
@@ -143,6 +153,7 @@
 		64B99EAF215BE7900040E12A /* M */ = {
 			isa = PBXGroup;
 			children = (
+				643B7257219F306300DF867F /* Status.swift */,
 				64B99EB0215BE79C0040E12A /* Structs.swift */,
 			);
 			path = M;
@@ -210,6 +221,11 @@
 				TargetAttributes = {
 					64B99E90215AF0780040E12A = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -274,6 +290,7 @@
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/FolioReaderKit/FolioReaderKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FontBlaster/FontBlaster.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQWebViewController/JSQWebViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/MenuItemKit/MenuItemKit.framework",
@@ -297,6 +314,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FolioReaderKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontBlaster.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQWebViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MenuItemKit.framework",
@@ -337,10 +355,13 @@
 				6480AAA7215D070C00B2EF85 /* chapterCell.swift in Sources */,
 				642BBAFD215C48F5000F32F4 /* bookCell.swift in Sources */,
 				6480AAA9215D2D6900B2EF85 /* readerVC.swift in Sources */,
+				643B7258219F306300DF867F /* Status.swift in Sources */,
 				64B99EB1215BE79C0040E12A /* Structs.swift in Sources */,
 				64B99EB4215BFD6B0040E12A /* picksCell.swift in Sources */,
+				643B725C219F3D2200DF867F /* LoginVC.swift in Sources */,
 				643B7252219F0C3A00DF867F /* popUpRegistrationVC.swift in Sources */,
 				64B99EAA215BB78D0040E12A /* extensions.swift in Sources */,
+				643B725A219F3A7200DF867F /* SignUpVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,6 +498,7 @@
 			baseConfigurationReference = CF3404D7F63899B7AD8B382C /* Pods-diis44.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = diis44/diis44.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4HPQKV33SX;
 				INFOPLIST_FILE = diis44/Info.plist;
@@ -496,6 +518,7 @@
 			baseConfigurationReference = 0886936400C234D20A013AE2 /* Pods-diis44.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = diis44/diis44.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4HPQKV33SX;
 				INFOPLIST_FILE = diis44/Info.plist;
