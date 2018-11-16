@@ -81,6 +81,20 @@ extension Discover {
             make.width.equalToSuperview()
             make.height.equalTo(200)
         }
+        let moreToExploreLabel = UILabel()
+        mainView.addSubview(moreToExploreLabel)
+        moreToExploreLabel.text = "More to Explore"
+        moreToExploreLabel.textAlignment = .left
+        moreToExploreLabel.font = UIFont(name: "BodoniSvtyTwoOSITCTT-Bold", size: 23.0)
+        moreToExploreLabel.textColor = UIColor.black
+        moreToExploreLabel.snp.makeConstraints { (make) in
+            make.height.greaterThanOrEqualTo(40)
+            make.width.greaterThanOrEqualTo(200)
+            make.left.equalTo(mainView).offset(5)
+            make.top.equalTo(popularStoriesCV.snp.bottom)
+        }
+        
+        
     }
 }
  //MARK :- ExtensionVC (CollectionViews)
@@ -221,8 +235,6 @@ extension Discover {
         
     }
 }
-
-
 
 //MARK :- DownloadFunc
 extension Discover {
