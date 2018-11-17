@@ -48,7 +48,7 @@ extension Encodable {
     }
 }
 
-//UI BUTTON . pulsate .flash etc....
+//UI BUTTON Animations . pulsate .flash etc....
 extension UIButton {
     
     func pulsate() {
@@ -134,7 +134,7 @@ extension UICollectionView {
         messageLabel.textColor = .black
         messageLabel.numberOfLines = 0;
         messageLabel.textAlignment = .center;
-        messageLabel.font = UIFont(name: "TrebuchetMS", size: 15)
+        messageLabel.font = UIFont(name: "Avenir", size: 15)
         messageLabel.sizeToFit()
         
         self.backgroundView = messageLabel;
@@ -206,7 +206,7 @@ extension UITabBarController {
         return self.tabBar.frame.origin.y < UIScreen.main.bounds.height
     }
 }
-
+//Shadow UIVIEW
 extension UIView {
     
     // OUTPUT 1

@@ -266,18 +266,14 @@ extension BookVC {
         
     }
     
-    
-    fileprivate func anonymousUser(){
-        
+    fileprivate func anonymousUser() {
 
-            
             Auth.auth().signInAnonymously() { (authResult, error) in
-            
                 if let error = error {
                     print(error.localizedDescription)
                     return
                 }
-                // Save eventual data
+                // TODO: Save eventual data
                 
                 let user = authResult?.user
                 let isAnonymous = user?.isAnonymous  // true
@@ -287,13 +283,8 @@ extension BookVC {
                 // buttons are disabled (following, dummy profile, likes)
                 
                 self.followBtn.backgroundColor = UIColor.lightGray
-                print("and user button is now lightgray")
-                
-                
-                
+            
             }
-        
-
     }
     
 }

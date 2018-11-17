@@ -72,7 +72,7 @@ extension SignUpVC{
         emailTF.snp.makeConstraints { (make) in
             make.height.equalTo(30)
             make.width.equalTo(200)
-            make.top.equalTo(mainView.snp.top).offset(100)
+            make.top.equalTo(mainView.snp.top).offset(50)
             make.centerX.equalTo(mainView.snp.centerX)
         }
         //nameTF
@@ -138,11 +138,11 @@ extension SignUpVC{
         }
         //dividerImage
         dividerImage.image = img
-        dividerImage.contentMode = .scaleAspectFill
+        dividerImage.contentMode = .scaleAspectFit
         mainView.addSubview(dividerImage)
         dividerImage.snp.makeConstraints { (make) in
-            make.height.equalTo(100)
-            make.width.equalTo(mainView.snp.width).offset(25)
+            make.height.equalTo(80)
+            make.width.equalTo(200)
             make.top.equalTo(signUpBtn.snp.bottom).offset(50)
             make.centerX.equalTo(mainView.snp.centerX)
         }

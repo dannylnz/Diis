@@ -1,38 +1,29 @@
-//
-//  popUpRegistrationVC.swift
-//  diis44
-//
-//  Created by Daniele Lanzetta on 16.11.18.
-//  Copyright © 2018 Daniele Lanzetta. All rights reserved.
-//
-
 import UIKit
+import Firebase
 import SnapKit
+import FirebaseFirestore
+import FirebaseAuth
 
-class popUpRegistrationVC: UIViewController {
-
+class ReadingVC: UIViewController {
+    
     let mainView = UIScrollView()
-    let facebookBtn = UIButton()
-    let mailBtn = UIButton()
-    let dismissBtn = UIButton()
-    let dismissImage = UIImage(named: "dismiss")
-    let onboardingImage = UIImageView()
-    let img = UIImage(named: "signupimg")
+        let facebookBtn = UIButton()
+        let mailBtn = UIButton()
+        let onboardingImage = UIImageView()
+        let img = UIImage(named: "onboardingreadingimg")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = false
-        viewSetup()
-        
+        checkIfUserIsLogged()
     }
     
 }
 
-
-extension popUpRegistrationVC{
+extension ReadingVC{
     
     func viewSetup() {
-        mainView.backgroundColor = UIColor.white
+        mainView.backgroundColor = UIColor.blue
+        navigationController?.title = "Reading"
         view.addSubview(mainView)
         mainView.snp.updateConstraints { (make) in
             make.top.equalTo(view.snp.top)
@@ -40,19 +31,31 @@ extension popUpRegistrationVC{
             make.width.equalToSuperview()
             
         }
-        //onboardingImage
+    }
+    
+    func viewSetupGuest() {
+        mainView.backgroundColor = UIColor.white
+        navigationController?.title = "Reading"
+        view.addSubview(mainView)
+        mainView.snp.updateConstraints { (make) in
+            make.top.equalTo(view.snp.top)
+            make.bottom.equalToSuperview()
+            make.width.equalToSuperview()
+        }
+        //OnboardingImage
         onboardingImage.image = img
         onboardingImage.contentMode = .scaleAspectFill
         mainView.addSubview(onboardingImage)
         onboardingImage.snp.makeConstraints { (make) in
-            make.height.width.equalTo(200)
-            make.top.equalTo(mainView.snp.top).offset(120)
+            make.height.equalTo(150)
+            make.width.equalTo(200)
+            make.top.equalTo(mainView.snp.top).offset(60)
             make.centerX.equalTo(mainView.snp.centerX)
         }
         //onboardingTextLabel
         let onboardingTextLabel = UILabel()
         mainView.addSubview(onboardingTextLabel)
-        onboardingTextLabel.text = "To save stories and review them\n you can create an account."
+        onboardingTextLabel.text = "Create an account to keep\n track of your favorite stories!"
         onboardingTextLabel.textAlignment = .center
         onboardingTextLabel.numberOfLines = 0
         onboardingTextLabel.font = UIFont(name: "BodoniSvtyTwoOSITCTT-Bold", size: 20.0)
@@ -87,29 +90,14 @@ extension popUpRegistrationVC{
             make.centerX.equalTo(onboardingImage.snp.centerX)
             make.top.equalTo(facebookBtn.snp.bottom).offset(9)
         }
-//        //dismiss Button
-//        dismissBtn.setImage(dismissImage, for: .normal)
-//        dismissBtn.contentMode = .scaleAspectFill
-//        dismissBtn.addTarget(self, action: #selector(dismissBtnClicked), for: .touchUpInside)
-//        mainView.addSubview(dismissBtn)
-//        dismissBtn.snp.makeConstraints { (make) in
-//            make.width.equalTo(20)
-//            make.height.equalTo(20)
-//            make.right.equalTo(mainView.snp.right).offset(50)
-//            make.top.equalTo(mainView.snp.top).offset(70)
-//        }
-        
-        
         
     }
     
+    //MARK:- Button functions
     @objc func facebookBtnClicked() {
-        
         facebookBtn.pulsate()
-       
-        //todo
+        //todo: add facebook integration
     }
-    
     @objc func mailBtnClicked() {
         mailBtn.pulsate()
         let signUpVC = SignUpVC()
@@ -119,10 +107,45 @@ extension popUpRegistrationVC{
         navigationController?.pushViewController(signUpVC, animated: true)
     }
     
-    @objc func dismissBtnClicked() {
+    
+    
+    
+    fileprivate func checkIfUserIsLogged() {
         
-        self.dismiss(animated: true, completion: nil)
+        if Auth.auth().currentUser != nil  {
+            print("user is authenticated")
+            viewSetup()
+            // todo
+        }else {
+            print("user is NOT authenticated")
+            viewSetupGuest()
+        }
         
     }
     
+    fileprivate func anonymousUser() {
+        
+        Auth.auth().signInAnonymously() { (authResult, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            // TODO: Save eventual data
+            
+            let user = authResult?.user
+            let isAnonymous = user?.isAnonymous  // true
+            let uid = user?.uid
+            
+            //Browse anonymously
+            // buttons are disabled (following, dummy profile, likes)
+            
+        }
+    }
+    
+}
+
+
+extension readerVC {
+    
+
 }
