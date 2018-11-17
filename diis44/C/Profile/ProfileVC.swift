@@ -21,6 +21,7 @@ extension ProfileVC{
     
     func viewSetup() {
         mainView.backgroundColor = UIColor.blue
+        navigationController?.title = "Profile"
         view.addSubview(mainView)
         mainView.snp.updateConstraints { (make) in
             make.top.equalTo(view.snp.top)

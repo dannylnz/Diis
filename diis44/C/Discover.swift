@@ -41,7 +41,7 @@ class Discover: UIViewController,UICollectionViewDelegate,UICollectionViewDataSo
         navBarSetup()
     }
     override func viewDidAppear(_ animated: Bool) {
-        tabBarController?.title = "Discover"
+        self.title = "Discover"
         tabBarController?.tabBar.isHidden = false
 
     }

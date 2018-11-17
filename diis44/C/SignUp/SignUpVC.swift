@@ -59,6 +59,7 @@ extension SignUpVC{
         }
       //emailTF
         emailTF.font = signFont
+        emailTF.clearButtonMode = .whileEditing
         emailTF.borderStyle = .roundedRect
         emailTF.autocorrectionType = .no
         emailTF.autocapitalizationType = .none
@@ -76,6 +77,7 @@ extension SignUpVC{
         }
         //nameTF
         nameTF.font = signFont
+        nameTF.clearButtonMode = .whileEditing
         nameTF.autocapitalizationType = .words
         nameTF.borderStyle = .roundedRect
         nameTF.attributedPlaceholder = NSAttributedString(string: "name", attributes: [
@@ -91,6 +93,7 @@ extension SignUpVC{
         }
         //passwordTF
         passwordTF.font = signFont
+        passwordTF.clearButtonMode = .whileEditing
         passwordTF.borderStyle = .roundedRect
         passwordTF.isSecureTextEntry = true
         passwordTF.attributedPlaceholder = NSAttributedString(string: "password", attributes: [
@@ -106,6 +109,7 @@ extension SignUpVC{
         }
         //confirmPasswordTF
         confirmPasswordTF.font = signFont
+        confirmPasswordTF.clearButtonMode = .whileEditing
         confirmPasswordTF.placeholder = "confirm password"
         confirmPasswordTF.borderStyle = .roundedRect
         confirmPasswordTF.isSecureTextEntry = true
@@ -160,6 +164,7 @@ extension SignUpVC{
         signInBtn.setTitle("Sign in", for: .normal)
         signInBtn.layer.cornerRadius = 4.0
         signInBtn.backgroundColor = UIColor.init(rgb: 0x3b5998)
+        signInBtn.addTarget(self, action: #selector(signInBtnClicked), for: .touchUpInside)
         mainView.addSubview(signInBtn)
         signInBtn.snp.makeConstraints { (make) in
             make.height.equalTo(36)
@@ -174,16 +179,27 @@ extension SignUpVC{
 }
 extension SignUpVC{
     
+    @objc func signInBtnClicked() {
+        signInBtn.pulsate()
+        let loginVC = LoginVC()
+        loginVC.title = "Sign in"
+        loginVC.modalPresentationStyle = .overCurrentContext
+        UINavigationBar.appearance().isHidden = true
+        navigationController?.pushViewController(loginVC, animated: true)
+    }
+    
     @objc func signUpBtnClicked(){
         
-       guard emailTF.text != "", nameTF.text != "" , passwordTF.text != "",confirmPasswordTF.text != "" else {return}
-        
+       guard emailTF.text != "", nameTF.text != "" , passwordTF.text != "",confirmPasswordTF.text != "" else {
+        self.showAlert(title: "fill the empty fields 😵", message: "")
+        return
+        }
         
         if passwordTF.text == confirmPasswordTF.text {
             
             Auth.auth().createUser(withEmail: emailTF.text!, password: passwordTF.text!, completion: { (user, error) in
                 if let error = error {
-                    
+                    self.showAlert(title: error.localizedDescription, message: "")
                     print(error.localizedDescription)
                 } else if let user = user {
                     
@@ -199,21 +215,37 @@ extension SignUpVC{
                         if let error = error {print (error.localizedDescription) //TODO - Message:cannot make your registration, Sorry! :(}
                         } else {
                             
-                            let alert = UIAlertController(title: "Sign up successful", message: "", preferredStyle: UIAlertControllerStyle.alert)
-                            alert.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: nil))
-                            self.present(alert, animated: true, completion: nil)
-                            print("user registered")
+                            self.showAlert(title: "Sign up successful", message: "")
+                        
                         }
                     })
                     
  
             
+                }
+            }
+            )}
+}
+    
+
+    
+    func showAlert(title: String, message: String){
+        
+        let alert = UIAlertController(title: title,message: message, preferredStyle: .alert)
+        // Accessing alert view backgroundColor :
+        alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = UIColor.white
+        present(alert, animated: true) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                alert.dismiss(animated: true, completion: nil)
+            }
+            
         }
     }
     
+ 
     
-)}
-}
+    
+    
 }
 
 

@@ -79,13 +79,14 @@ extension BookVC {
         followBtn.backgroundColor = .blue
         followBtn.setTitle("Follow", for: .normal)
         followBtn.layer.cornerRadius = 4.0
+        followBtn.titleLabel?.font = UIFont(name: "Avenir-Heavy", size: 15)
         followBtn.addTarget(self, action: #selector(followBtnClicked), for: .touchUpInside)
         mainView.addSubview(followBtn)
         followBtn.snp.makeConstraints { (make) in
             make.width.equalTo(bookImage.snp.width)
-            make.height.equalTo(32)
+            make.height.equalTo(30)
             make.centerX.equalTo(bookImage.snp.centerX)
-            make.top.equalTo(bookImage.snp.bottom).offset(6)
+            make.top.equalTo(bookImage.snp.bottom).offset(12)
         }
         
         
@@ -130,12 +131,26 @@ extension BookVC {
             make.centerX.equalTo(bookImage.snp.centerX)
             make.top.equalTo(AuthorLbl.snp.bottom)
         }
+        //chaptersLabel
+        let chapterLabel = UILabel()
+        mainView.addSubview(chapterLabel)
+        chapterLabel.text = "Chapters"
+        chapterLabel.textAlignment = .left
+        chapterLabel.font = UIFont(name: "BodoniSvtyTwoITCTT-Bold", size: 26.0)
+        chapterLabel.textColor = UIColor.black
+        chapterLabel.snp.makeConstraints { (make) in
+            make.height.greaterThanOrEqualTo(40)
+            make.width.greaterThanOrEqualTo(200)
+            make.left.equalTo(mainView).offset(5)
+            make.top.equalTo(PlotLbl.snp.bottom)
+        }
         
         //CollectionView
         chaptersCV.snp.makeConstraints { (make) in
-            make.top.equalTo(PlotLbl.snp.bottom).offset(5)
+            make.top.equalTo(chapterLabel.snp.bottom).offset(5)
             make.bottom.equalTo(mainView.snp.bottom)
-            make.width.equalToSuperview()
+            make.width.equalToSuperview().offset(16)
+             make.centerX.equalTo(mainView.snp.centerX)
         }
         
     }
