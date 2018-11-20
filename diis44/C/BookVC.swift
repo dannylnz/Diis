@@ -22,10 +22,22 @@ class BookVC: UIViewController,UICollectionViewDelegate,UICollectionViewDelegate
     var chapters = [Chapter]()
     var CATEGORY_NAME = ""
     var book:Book?
+    var bookId = ""
+    var bookLink = ""
+    var followingBooks = [String]()
+    let db = Firestore.firestore()
+    let userUid = Auth.auth().currentUser?.uid
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        getFollowedBooks { (success, response, error) in
+            if success {
+                let pick = response
+                self.followingBooks = pick as! [String]
+                self.isFollowing()
+            }
+        }
+       
         downloadChapters { (success, response, error) in
             if success {
                 let chapter = response as! Chapter
@@ -34,13 +46,13 @@ class BookVC: UIViewController,UICollectionViewDelegate,UICollectionViewDelegate
                 } else if let error = error {
                 print (error)
             }
-           
         }
         
     //setupView
         setupCollectionView()
         viewSetup()
-        checkIfUserIsLogged()
+        
+    
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,7 +64,6 @@ class BookVC: UIViewController,UICollectionViewDelegate,UICollectionViewDelegate
 //ViewSetup
 extension BookVC {
     func viewSetup(){
-    
         mainView.backgroundColor = UIColor.white
         self.view.addSubview(mainView)
         mainView.snp.updateConstraints { (make) in
@@ -76,10 +87,7 @@ extension BookVC {
         bookImage.dropShadow(scale: true)
         
         //FollowBtn
-        followBtn.backgroundColor = .blue
-        followBtn.setTitle("Follow", for: .normal)
-        followBtn.layer.cornerRadius = 4.0
-        followBtn.titleLabel?.font = UIFont(name: "Avenir-Heavy", size: 15)
+        isFollowing()
         followBtn.addTarget(self, action: #selector(followBtnClicked), for: .touchUpInside)
         mainView.addSubview(followBtn)
         followBtn.snp.makeConstraints { (make) in
@@ -154,12 +162,43 @@ extension BookVC {
         }
         
     }
-    @objc func followBtnClicked() {
+    @objc func followBtnClicked(sender: UIButton!) {
+
+        if Auth.auth().currentUser != nil  {
         
-        let popUp = popUpRegistrationVC()
-        popUp.modalPresentationStyle = .overCurrentContext
-        UINavigationBar.appearance().isHidden = true
-        navigationController?.pushViewController(popUp, animated: true)
+            let userUid = Auth.auth().currentUser?.uid
+            let userRef = db.collection("users")
+            let thisUserRef = userRef.document("\(userUid!)")
+            //isfollowing
+            
+            switch followingBooks.contains("\(bookLink)") {
+            case true:// IS Following
+                isFollowing()
+                thisUserRef.updateData([
+                    "following": FieldValue.arrayRemove(["\(bookLink)"])
+                    ])
+                
+                print ("Book Removed")
+            case false: //is-NOT-following
+                isFollowing()
+                thisUserRef.updateData([
+                    "following": FieldValue.arrayUnion(["\(bookLink)"])
+                    ])
+                 print ("Book added to user list")
+                followBtn.isSelected = false
+            default:
+                break
+            }
+ 
+        } else {
+            print("user is NOT authenticated")
+            let popUp = popUpRegistrationVC()
+            popUp.modalPresentationStyle = .overCurrentContext
+            UINavigationBar.appearance().isHidden = true
+            navigationController?.pushViewController(popUp, animated: true)
+            
+        }
+        
         
     }
 }
@@ -240,10 +279,6 @@ extension BookVC{
                     let chapter = chapter["chapter"] as! String
                     let chapterRoot = db.collectionID
                     let aChapter = Chapter(title: chapterTitle, value: chapter, root:chapterRoot)
-                    
-
-                    
-                    
                     completion(true,aChapter,nil)
                 }
             }
@@ -255,37 +290,82 @@ extension BookVC{
 extension BookVC {
     
     fileprivate func checkIfUserIsLogged() {
-        
         if Auth.auth().currentUser != nil  {
             print("user is authenticated")
-            // todo
+            let userUid = Auth.auth().currentUser?.uid
+            let userRef = db.collection("users")
+            userRef.document(userUid!).setValue(bookLink, forKey: "following")
+            
+            //following
+            
+        
         }else {
             print("user is NOT authenticated")
-            self.anonymousUser()
+            let popUp = popUpRegistrationVC()
+            popUp.modalPresentationStyle = .overCurrentContext
+            UINavigationBar.appearance().isHidden = true
+            navigationController?.pushViewController(popUp, animated: true)
+
         }
         
     }
     
-    fileprivate func anonymousUser() {
-
-            Auth.auth().signInAnonymously() { (authResult, error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                    return
-                }
-                // TODO: Save eventual data
+    func getFollowedBooks(completion: @escaping (Bool, Any?, Error?) -> Void) {
+        let db = Firestore.firestore().collection("users").document(userUid!)
+        db.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dictionary = document.data() as! [String:Any]
+                let followedBooksArray = dictionary["following"] as! [String]
+                completion(true,followedBooksArray,nil)
                 
-                let user = authResult?.user
-                let isAnonymous = user?.isAnonymous  // true
-                let uid = user?.uid
-                
-                //Browse anonymously
-                // buttons are disabled (following, dummy profile, likes)
-                
-                self.followBtn.backgroundColor = UIColor.lightGray
-            
+            } else {
+                print("Document does not exist")
             }
+        }
+        
     }
+    
+    
+    func isFollowing() {
+        
+        switch followingBooks.contains("\(bookLink)") {
+        case true:
+                followBtn.backgroundColor = .green
+                followBtn.setTitle("Following", for: .normal)
+                followBtn.layer.cornerRadius = 4.0
+                followBtn.titleLabel?.font = UIFont(name: "Avenir-Heavy", size: 15)
+            
+            
+        case false:
+            followBtn.backgroundColor = .blue
+            followBtn.setTitle("Follow", for: .normal)
+            followBtn.layer.cornerRadius = 4.0
+            followBtn.titleLabel?.font = UIFont(name: "Avenir-Heavy", size: 15)
+            
+            
+        default:
+            break
+        }
+        
+        
+//        if followingBooks.contains("\(bookLink)") {
+//            followBtn.backgroundColor = .green
+//            followBtn.setTitle("Following", for: .normal)
+//            followBtn.layer.cornerRadius = 4.0
+//            followBtn.titleLabel?.font = UIFont(name: "Avenir-Heavy", size: 15)
+//            followBtn.addTarget(self, action: #selector(followBtnClicked), for: .touchUpInside)
+//
+//        } else {
+//
+//            followBtn.backgroundColor = .blue
+//            followBtn.setTitle("Follow", for: .normal)
+//            followBtn.layer.cornerRadius = 4.0
+//            followBtn.titleLabel?.font = UIFont(name: "Avenir-Heavy", size: 15)
+//            followBtn.addTarget(self, action: #selector(followBtnClicked), for: .touchUpInside)
+//        }
+        
+    }
+    
     
 }
 

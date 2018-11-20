@@ -145,6 +145,7 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AEXML/AEXML.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/CardsLayout/CardsLayout.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FolioReaderKit/FolioReaderKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FontBlaster/FontBlaster.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework"
@@ -168,6 +169,7 @@ fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AEXML/AEXML.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/CardsLayout/CardsLayout.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FolioReaderKit/FolioReaderKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FontBlaster/FontBlaster.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework"

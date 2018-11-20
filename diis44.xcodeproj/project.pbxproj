@@ -15,6 +15,7 @@
 		643B7258219F306300DF867F /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643B7257219F306300DF867F /* Status.swift */; };
 		643B725A219F3A7200DF867F /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643B7259219F3A7200DF867F /* SignUpVC.swift */; };
 		643B725C219F3D2200DF867F /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643B725B219F3D2200DF867F /* LoginVC.swift */; };
+		643B726321A3120E00DF867F /* followingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643B726221A3120E00DF867F /* followingCell.swift */; };
 		6480AAA7215D070C00B2EF85 /* chapterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6480AAA6215D070C00B2EF85 /* chapterCell.swift */; };
 		6480AAA9215D2D6900B2EF85 /* readerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6480AAA8215D2D6900B2EF85 /* readerVC.swift */; };
 		64A1B2E1219CB6820095F6B3 /* popularStoriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A1B2E0219CB6810095F6B3 /* popularStoriesCell.swift */; };
@@ -42,6 +43,7 @@
 		643B7259219F3A7200DF867F /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		643B725B219F3D2200DF867F /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		643B725F219F82A300DF867F /* diis44.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = diis44.entitlements; sourceTree = "<group>"; };
+		643B726221A3120E00DF867F /* followingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = followingCell.swift; sourceTree = "<group>"; };
 		6480AAA6215D070C00B2EF85 /* chapterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chapterCell.swift; sourceTree = "<group>"; };
 		6480AAA8215D2D6900B2EF85 /* readerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = readerVC.swift; sourceTree = "<group>"; };
 		64A1B2E0219CB6810095F6B3 /* popularStoriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popularStoriesCell.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				64A1B2E0219CB6810095F6B3 /* popularStoriesCell.swift */,
 				642BBAFC215C48F5000F32F4 /* bookCell.swift */,
 				6480AAA6215D070C00B2EF85 /* chapterCell.swift */,
+				643B726221A3120E00DF867F /* followingCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-diis44/Pods-diis44-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AEXML/AEXML.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/CardsLayout/CardsLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/FolioReaderKit/FolioReaderKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FontBlaster/FontBlaster.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
@@ -312,6 +316,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AEXML.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CardsLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FolioReaderKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontBlaster.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
@@ -356,6 +361,7 @@
 				642BBAFD215C48F5000F32F4 /* bookCell.swift in Sources */,
 				6480AAA9215D2D6900B2EF85 /* readerVC.swift in Sources */,
 				643B7258219F306300DF867F /* Status.swift in Sources */,
+				643B726321A3120E00DF867F /* followingCell.swift in Sources */,
 				64B99EB1215BE79C0040E12A /* Structs.swift in Sources */,
 				64B99EB4215BFD6B0040E12A /* picksCell.swift in Sources */,
 				643B725C219F3D2200DF867F /* LoginVC.swift in Sources */,

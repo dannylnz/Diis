@@ -6,6 +6,7 @@ PODS:
   - BoringSSL/Implementation (10.0.6):
     - BoringSSL/Interface (= 10.0.6)
   - BoringSSL/Interface (10.0.6)
+  - CardsLayout (0.0.1)
   - Firebase/Auth (5.7.0):
     - Firebase/CoreOnly
     - FirebaseAuth (= 5.0.3)
@@ -125,6 +126,7 @@ PODS:
   - ZFDragableModalTransition (0.6)
 
 DEPENDENCIES:
+  - CardsLayout
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
@@ -136,6 +138,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AEXML
     - BoringSSL
+    - CardsLayout
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -167,6 +170,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AEXML: 5ebafc1b75e0bcf0f1b09b8ca8fed2d5a199479b
   BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
+  CardsLayout: ceeb8f9c26319b47a2f0995ea4590cf7ba881462
   Firebase: 734a4f92957aa6c40e7ae3fda3d9359e1890aa87
   FirebaseAnalytics: 993577e91157feb40945abedd6ab346d8a4b6ac8
   FirebaseAuth: 657a25e4be044d2d333663ebf515a861c5a59cd7
@@ -195,6 +199,6 @@ SPEC CHECKSUMS:
   SSZipArchive: 14401ade5f8e82aba1ff03e9f88e9de60937ae60
   ZFDragableModalTransition: 0d294eaaba6edfcb9839595de765f9ca06a4b524
 
-PODFILE CHECKSUM: 4814ef67c579e3cd417002dd616393dc11fd2d34
+PODFILE CHECKSUM: 2483bef489f5df65479e8a1a232654ec0d64a6e4
 
 COCOAPODS: 1.5.2

@@ -6,7 +6,7 @@ struct User {
     var name:String
     var email:String
     var bookFollowed:[Book]
-    var uid:FIRAuthSettings
+    var uid:String
     
 }
 
@@ -19,8 +19,8 @@ struct Book {
     var coverImage:String
     var plot:String
     var root:String
-    
-    init(title:String,author:String,numberOfLikes:Int,numberOfFollowers:Int,coverImage:String,plot:String,root:String) {
+    var category:String
+    init(title:String,author:String,numberOfLikes:Int,numberOfFollowers:Int,coverImage:String,plot:String,root:String,category:String) {
         self.title = title
         self.author = author
         self.coverImage = coverImage
@@ -28,6 +28,7 @@ struct Book {
         self.numberOfLikes = numberOfLikes
         self.plot = plot
         self.root = root
+        self.category = category
     }
     
 }

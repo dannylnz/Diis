@@ -2,6 +2,7 @@ import UIKit
 import Firebase
 import SnapKit
 import FirebaseFirestore
+import CardsLayout
 
 class Discover: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
@@ -24,7 +25,6 @@ class Discover: UIViewController,UICollectionViewDelegate,UICollectionViewDataSo
                 print (error)
             }
         }
-        
         downloadPicks { (success, response, error) in
             if success {
                 let pick = response as! Category
@@ -34,18 +34,25 @@ class Discover: UIViewController,UICollectionViewDelegate,UICollectionViewDataSo
                 print (error)
             }
         }
-        
         setupCollectionView()
         setupPopularStoriesCollectionView()
         viewSetup()
         navBarSetup()
     }
+    
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         self.title = "Discover"
         tabBarController?.tabBar.isHidden = false
 
     }
 }
+
+
+
+
+
 //view layout
 extension Discover {
     func viewSetup() {
@@ -76,7 +83,8 @@ extension Discover {
             make.top.equalTo(picksCV.snp.bottom)
         }
         popularStoriesCV.snp.makeConstraints { (make) in
-            make.top.equalTo(popularStoriesLabel.snp.bottom).offset(5)
+            make.top.equalTo(popularStoriesLabel.snp.bottom)
+            make.left.equalToSuperview().offset(20)
             make.width.equalToSuperview()
             make.height.equalTo(220)
         }
@@ -96,7 +104,16 @@ extension Discover {
         
     }
 }
+
+
+
+
+
+
+
+
  //MARK :- ExtensionVC (CollectionViews)
+
 extension Discover {
  //MARK :- picksCV
     func setupCollectionView() {
@@ -125,6 +142,7 @@ extension Discover {
         layout.minimumLineSpacing = 10.0
         layout.minimumInteritemSpacing = 35.0
         popularStoriesCV = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        popularStoriesCV.isPagingEnabled = true
         popularStoriesCV.dataSource = self
         popularStoriesCV.delegate = self
         popularStoriesCV.tag = 1
@@ -132,7 +150,6 @@ extension Discover {
         popularStoriesCV.backgroundColor = UIColor.white
         mainView.addSubview(popularStoriesCV)
     }
-    
     
     
     func collectionView(_ collectionView: UICollectionView,
@@ -144,7 +161,7 @@ extension Discover {
             let size = CGSize(width: 220, height: 110)
             return size
         case 1:
-            let size = CGSize(width: 90, height: 160)
+            let size = CGSize(width: 110, height: 160)
             return size
         default:
             break
@@ -175,8 +192,9 @@ extension Discover {
             cell.backgroundView = cell.image
             cell.dropShadow()
             cell.image.mask?.clipsToBounds = true
-            cell.layer.cornerRadius = 4.0
-            cell.image.layer.cornerRadius = 4.0
+            cell.layer.cornerRadius = 12.0
+            cell.image.layer.cornerRadius = 12.0
+            cell.image.contentMode = .scaleAspectFill
             cell.addSubview(cell.image)
             cell.addSubview(cell.categoryName)
 
@@ -189,13 +207,15 @@ extension Discover {
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "popularStoriesCell", for: indexPath) as! popularStoriesCell
-            cell.backgroundColor = .white
             cell.bookTitleLbl.text = popularStoriesCategory[indexPath.row].title
             cell.bookAuthorLbl.text = popularStoriesCategory[indexPath.row].author
             cell.image.downloadedFrom(link: popularStoriesCategory[indexPath.row].coverImage)
+//            cell.image.mask?.clipsToBounds = true
+            cell.image.layer.masksToBounds = true
             cell.backgroundView = cell.image
-            cell.image.mask?.clipsToBounds = false
-            cell.layer.cornerRadius = 4.0
+            cell.layer.masksToBounds = true
+            cell.image.contentMode = .scaleAspectFit
+            cell.layer.cornerRadius = 15.0
             cell.addSubview(cell.image)
             cell.addSubview(cell.bookTitleLbl)
             cell.addSubview(cell.bookAuthorLbl)
@@ -239,6 +259,13 @@ extension Discover {
     }
 }
 
+
+
+
+
+
+
+/////////////
 //MARK :- DownloadFunc
 extension Discover {
     func downloadPicks(completion: @escaping (Bool, Any?, Error?) -> Void) {
@@ -277,7 +304,8 @@ extension Discover {
                     let numberOfLikes = document["numberOfLikes"] as! Int
                     let numberOfFollowers = document["numberOfFollowers"] as! Int
                     let root = document.documentID
-                    let aBook = Book(title: title,author:author,numberOfLikes:numberOfLikes, numberOfFollowers:numberOfFollowers, coverImage: coverImage, plot:plot, root: root)
+                    let category = document["category"] as! String
+                    let aBook = Book(title: title,author:author,numberOfLikes:numberOfLikes, numberOfFollowers:numberOfFollowers, coverImage: coverImage, plot:plot, root: root, category: category)
                     completion(true,aBook,nil)
                 }
             }

@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = navigationController
         navigationController.isNavigationBarHidden = true
         window?.makeKeyAndVisible()
-        
+        //
         //placeholder below : USER AUTH Guest
         let userDefaults = UserDefaults.standard
         if userDefaults.value(forKey: "appFirstTimeOpend") == nil {
@@ -45,6 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             //go to where you want
         }
+        // End of placeholder
+        //
         return true
     }
 

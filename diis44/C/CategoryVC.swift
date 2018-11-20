@@ -11,6 +11,7 @@ class CategoryVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     var booksCollectionView: UICollectionView!
     var books = [Book]()
     var CATEGORY_NAME = ""
+    var bookId = ""
 
 
     override func viewDidAppear(_ animated: Bool) {
@@ -57,7 +58,8 @@ extension CategoryVC{
                     let numberOfLikes = document["numberOfLikes"] as! Int
                     let numberOfFollowers = document["numberOfFollowers"] as! Int
                     let root = document.documentID
-                    let aBook = Book(title: title,author:author,numberOfLikes:numberOfLikes, numberOfFollowers:numberOfFollowers, coverImage: coverImage, plot:plot, root: root)
+                    let category = document["category"] as! String
+                    let aBook = Book(title: title,author:author,numberOfLikes:numberOfLikes, numberOfFollowers:numberOfFollowers, coverImage: coverImage, plot:plot, root: root, category: category)
                     completion(true,aBook,nil)
                 }
             }
@@ -205,7 +207,8 @@ extension CategoryVC {
         vc.bookPlot = books[indexPath.row].plot
         vc.tabBarController?.title? = ""
         vc.CATEGORY_NAME = CATEGORY_NAME
-        
+        vc.bookId = books[indexPath.row].root
+        vc.bookLink = "/category/\(vc.CATEGORY_NAME)/books/\(books[indexPath.row].root)"
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

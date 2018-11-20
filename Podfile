@@ -12,5 +12,6 @@ target 'diis44' do
   pod 'SnapKit'
     pod 'ReadMoreTextView'
     pod 'FolioReaderKit'
+    pod 'CardsLayout'
 
 end
