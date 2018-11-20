@@ -11,7 +11,7 @@ class Discover: UIViewController,UICollectionViewDelegate,UICollectionViewDataSo
     var popularStoriesCV:UICollectionView!
     private var picksCategory = [Category]()
     private var popularStoriesCategory = [Book]()
-    
+
     override func viewDidLoad() {
         self.title = "Discover"
         tabBarController?.tabBar.isHidden = false
@@ -37,21 +37,23 @@ class Discover: UIViewController,UICollectionViewDelegate,UICollectionViewDataSo
         setupCollectionView()
         setupPopularStoriesCollectionView()
         viewSetup()
-        navBarSetup()
+
     }
-    
-    
+
+
     
     override func viewDidAppear(_ animated: Bool) {
         self.title = "Discover"
         tabBarController?.tabBar.isHidden = false
 
     }
+    override func viewWillAppear(_ animated: Bool) {
+        self.title = "Discover"
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        tabBarController?.tabBar.isHidden = false
+        super.viewWillAppear(animated)
+    }
 }
-
-
-
-
 
 //view layout
 extension Discover {
@@ -62,9 +64,7 @@ extension Discover {
             make.top.equalTo(view.snp.top)
             make.bottom.equalToSuperview()
             make.width.equalToSuperview()
-            
         }
-        
         picksCV.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.width.equalToSuperview()
@@ -100,20 +100,9 @@ extension Discover {
             make.left.equalTo(mainView).offset(5)
             make.top.equalTo(popularStoriesCV.snp.bottom)
         }
-        
-        
     }
 }
-
-
-
-
-
-
-
-
  //MARK :- ExtensionVC (CollectionViews)
-
 extension Discover {
  //MARK :- picksCV
     func setupCollectionView() {
@@ -132,26 +121,24 @@ extension Discover {
         picksCV.backgroundColor = UIColor.white
         mainView.addSubview(picksCV)
     }
-    
     //MARK :- popularStoriesCV
     func setupPopularStoriesCollectionView() {
         //layoutCollectionView
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsetsMake(-25, 10, 0, 10)
+        layout.sectionInset = UIEdgeInsetsMake(-50, 5, 0, 10)
         layout.minimumLineSpacing = 10.0
-        layout.minimumInteritemSpacing = 35.0
+        layout.minimumInteritemSpacing = 3.0
         popularStoriesCV = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         popularStoriesCV.isPagingEnabled = true
         popularStoriesCV.dataSource = self
         popularStoriesCV.delegate = self
         popularStoriesCV.tag = 1
+        popularStoriesCV.alwaysBounceHorizontal = true
         popularStoriesCV.register(popularStoriesCell.self, forCellWithReuseIdentifier: "popularStoriesCell")
         popularStoriesCV.backgroundColor = UIColor.white
         mainView.addSubview(popularStoriesCV)
     }
-    
-    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -166,10 +153,8 @@ extension Discover {
         default:
             break
         }
-        
         let size = CGSize(width: 100, height: 200)
         return size
-        
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView.tag {
@@ -180,7 +165,6 @@ extension Discover {
         default:
             break
         }
-        
        return 0
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -191,13 +175,13 @@ extension Discover {
             cell.image.downloadedFrom(link: picksCategory[indexPath.row].categoryImage)
             cell.backgroundView = cell.image
             cell.dropShadow()
-            cell.image.mask?.clipsToBounds = true
+            cell.image.layer.masksToBounds = true
+            cell.image.contentMode = .scaleAspectFill
             cell.layer.cornerRadius = 12.0
             cell.image.layer.cornerRadius = 12.0
-            cell.image.contentMode = .scaleAspectFill
+            
             cell.addSubview(cell.image)
             cell.addSubview(cell.categoryName)
-
             cell.categoryName.snp.makeConstraints { (make) in
                 make.height.greaterThanOrEqualTo(40)
                 make.width.equalTo(cell.snp.width)
@@ -210,19 +194,16 @@ extension Discover {
             cell.bookTitleLbl.text = popularStoriesCategory[indexPath.row].title
             cell.bookAuthorLbl.text = popularStoriesCategory[indexPath.row].author
             cell.image.downloadedFrom(link: popularStoriesCategory[indexPath.row].coverImage)
-//            cell.image.mask?.clipsToBounds = true
             cell.image.layer.masksToBounds = true
-            cell.backgroundView = cell.image
-            cell.layer.masksToBounds = true
-            cell.image.contentMode = .scaleAspectFit
-            cell.layer.cornerRadius = 15.0
+            cell.image.contentMode = .scaleAspectFill
+            cell.layer.cornerRadius = 12.0
             cell.addSubview(cell.image)
             cell.addSubview(cell.bookTitleLbl)
             cell.addSubview(cell.bookAuthorLbl)
 
             cell.image.snp.makeConstraints { (make) in
                 make.height.equalTo(cell.snp.height)
-                make.width.equalTo(100)
+                make.width.equalTo(cell.snp.width)
             }
             cell.bookTitleLbl.snp.makeConstraints { (make) in
                 make.height.lessThanOrEqualTo(30)
@@ -258,16 +239,9 @@ extension Discover {
         
     }
 }
-
-
-
-
-
-
-
-/////////////
 //MARK :- DownloadFunc
 extension Discover {
+    //This function downloads the categories in the DB ---category/ (IE: Drama / SciFi / Humor / History / etc...)
     func downloadPicks(completion: @escaping (Bool, Any?, Error?) -> Void) {
         let db = Firestore.firestore().collection("category")
         db.getDocuments { (snapshot, error) in
@@ -285,8 +259,6 @@ extension Discover {
             }
         }
     }
-    
-    
     
     // This function downloads only stories where number of followers is greater than X (isGreaterThan)
     // To set to query stories that have big following
@@ -311,47 +283,12 @@ extension Discover {
             }
         }
     }
-    
-    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // NavBar Setup
 extension Discover {
     func navBarSetup(){
         tabBarController?.title = "Discover"
         tabBarController?.tabBar.barTintColor = UIColor.white
-        tabBarController?.tabBar.layer.masksToBounds = false
         tabBarController?.tabBar.layer.shadowColor = UIColor.darkGray.cgColor
         tabBarController?.tabBar.layer.shadowOpacity = 0.2
         tabBarController?.tabBar.layer.shadowOffset = CGSize(width: 0, height: -4.5)

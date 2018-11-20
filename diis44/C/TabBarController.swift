@@ -13,13 +13,13 @@ class TabBarController: UITabBarController {
     let discoverIcon = UIImage(named: "discover")
     let discoverIconClicked = UIImage(named: "discoverClicked")
     
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         discoverVC.tabBarItem = UITabBarItem(title: "discover", image: discoverIcon?.withRenderingMode(.alwaysTemplate), selectedImage: discoverIconClicked?.withRenderingMode(.alwaysOriginal))
         readingVC.tabBarItem = UITabBarItem(title: "reading", image: readIcon?.withRenderingMode(.alwaysTemplate), selectedImage: readIconClicked?.withRenderingMode(.alwaysOriginal))
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.lightGray], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .selected)
-        
         tabBar.tintColor = UIColor.black
         navigationController?.tabBarController?.tabBar.backgroundColor = UIColor.black
         let controllers = [discoverVC,readingVC]

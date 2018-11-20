@@ -25,7 +25,6 @@ class ReadingVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Reading"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "logout", style: .plain, target: self, action: #selector(logOutBtnClicked))
         checkIfUserIsLogged()
         
     }
@@ -50,7 +49,7 @@ extension ReadingVC {
             make.width.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
         }
-        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "logout", style: .plain, target: self, action: #selector(logOutBtnClicked))
         
     }
     

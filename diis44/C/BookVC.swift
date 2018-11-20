@@ -30,13 +30,18 @@ class BookVC: UIViewController,UICollectionViewDelegate,UICollectionViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getFollowedBooks { (success, response, error) in
-            if success {
-                let pick = response
-                self.followingBooks = pick as! [String]
-                self.isFollowing()
+        
+        if userUid != nil {
+            getFollowedBooks { (success, response, error) in
+                if success {
+                    let pick = response
+                    self.followingBooks = pick as! [String]
+                    self.isFollowing()
+                }
             }
+            
         }
+
        
         downloadChapters { (success, response, error) in
             if success {

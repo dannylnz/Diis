@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabBar = TabBarController()
         window = UIWindow(frame: UIScreen.main.bounds)
         let navigationController = UINavigationController(rootViewController: tabBar)
-        navigationController.navigationBar.prefersLargeTitles = true
         window?.rootViewController = navigationController
         navigationController.isNavigationBarHidden = true
         window?.makeKeyAndVisible()
