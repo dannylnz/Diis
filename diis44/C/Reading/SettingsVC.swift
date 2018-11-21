@@ -7,8 +7,9 @@ import FirebaseAuth
 class SettingsVC: UIViewController, UITableViewDelegate,UITableViewDataSource {
 
     let mainView = UIScrollView()
-    let settingsTVCategories = ["Login","Get extra"]
+    let settingsTVCategories = ["Login Screen","Get extra","Logout"]
     var settingsTV = UITableView()
+    let logOutBtn = UIButton()
     let userUid = Auth.auth().currentUser?.uid
 
     override func viewDidLoad() {
@@ -37,7 +38,7 @@ extension SettingsVC {
         }
     }
     func viewSetupGuest() {
-        mainView.backgroundColor = UIColor.green
+        mainView.backgroundColor = UIColor.white
         navigationController?.title = "Settings Guest"
         view.addSubview(mainView)
         mainView.snp.updateConstraints { (make) in
@@ -65,6 +66,14 @@ extension SettingsVC {
 // MARK:- Table View Setup
 extension SettingsVC {
     
+    func setupSettingsTableView() {
+        settingsTV.dataSource = self
+        settingsTV.delegate = self
+        settingsTV.register(settingsTableViewCell.self, forCellReuseIdentifier: "settingsTableViewCell")
+        settingsTV.backgroundColor = UIColor.white
+        mainView.addSubview(settingsTV)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return settingsTVCategories.count
     }
@@ -75,6 +84,7 @@ extension SettingsVC {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch userUid {
+        
         case nil:
             let cell = tableView.dequeueReusableCell(withIdentifier: "settingsTableViewCell", for: indexPath) as! settingsTableViewCell
             cell.title.text = settingsTVCategories[indexPath.row]
@@ -86,6 +96,7 @@ extension SettingsVC {
                 cell.title.sizeToFit()
             }
             return cell
+        
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "settingsTableViewCell", for: indexPath) as! settingsTableViewCell
             cell.title.text = settingsTVCategories[indexPath.row]
@@ -93,15 +104,39 @@ extension SettingsVC {
             cell.title.snp.makeConstraints { (make) in
                 cell.title.sizeToFit()
             }
+            setupLogOutBtn()
             return cell
         }
     }
-    //TABLE View SETUP
-    func setupSettingsTableView() {
-        settingsTV.dataSource = self
-        settingsTV.delegate = self
-        settingsTV.register(settingsTableViewCell.self, forCellReuseIdentifier: "settingsTableViewCell")
-        settingsTV.backgroundColor = UIColor.white
-        mainView.addSubview(settingsTV)
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+    }
+}
+
+//MARK:- Functions
+extension SettingsVC {
+    
+    func setupLogOutBtn() {
+        let customView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+        customView.backgroundColor = UIColor.red
+        let logOutBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        logOutBtn.setTitle("Logout", for: .normal)
+        logOutBtn.addTarget(self, action: #selector(logOutBtnClicked), for: .touchUpInside)
+        customView.addSubview(logOutBtn)
+        settingsTV.tableFooterView = customView
+    }
+    
+    @objc func logOutBtnClicked(sender: UIButton) {
+        if userUid == nil {
+            print("there is no user authenticated")
+        } else {
+            do {
+                try Auth.auth().signOut()
+            } catch  {
+                //Catch error
+            }
+            let tabBar = TabBarController()
+            self.navigationController?.present(tabBar, animated: true, completion: nil)
+        }
     }
 }

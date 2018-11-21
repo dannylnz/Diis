@@ -5,23 +5,23 @@ import FirebaseFirestore
 import FirebaseAuth
 
 class ReadingVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
-
-        let mainView = UIScrollView()
-        var followingCV:UICollectionView!
-        let facebookBtn = UIButton()
-        let mailBtn = UIButton()
-        let logoutBtn = UIButton()
-        let settingsBtn = UIButton()
-        let signInBtn = UIButton()
-        let onboardingImage = UIImageView()
-        let userUid = Auth.auth().currentUser?.uid
-        var followedBooks = [String]()
-        private var booksFollowedByUser = [Book]()
-        let img = UIImage(named: "onboardingreadingimg")
-        let AlreadyhaveAnAccountLabel = UILabel()
-        //Img
-        let dividerImage = UIImageView()
-        let dividerImg = UIImage(named: "divider")
+    
+    let mainView = UIScrollView()
+    var followingCV:UICollectionView!
+    let facebookBtn = UIButton()
+    let mailBtn = UIButton()
+    let logoutBtn = UIButton()
+    let settingsBtn = UIButton()
+    let signInBtn = UIButton()
+    let onboardingImage = UIImageView()
+    let userUid = Auth.auth().currentUser?.uid
+    var followedBooks = [String]()
+    private var booksFollowedByUser = [Book]()
+    let img = UIImage(named: "onboardingreadingimg")
+    let AlreadyhaveAnAccountLabel = UILabel()
+    //Img
+    let dividerImage = UIImageView()
+    let dividerImg = UIImage(named: "divider")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -175,9 +175,8 @@ extension ReadingVC {
     }
     
     @objc func settingsBtnClicked(){
-        //Todo:open Collectionview with settings
-        //remove logout
         let settingsVC = SettingsVC()
+        settingsVC.title = "Settings" 
         navigationController?.pushViewController(settingsVC, animated: true)
         print("setting Btn Clicked -")
     }
@@ -194,29 +193,15 @@ extension ReadingVC {
         UINavigationBar.appearance().isHidden = true
         navigationController?.pushViewController(signUpVC, animated: true)
     }
-    @objc func logOutBtnClicked() {
-        logoutBtn.pulsate()
-        do {
-            try Auth.auth().signOut()
-           
-        } catch  {
-            
-        }
-      
-        let tabBar = TabBarController()
-       self.navigationController?.present(tabBar, animated: true, completion: nil)
-  
-    }
+    
     fileprivate func checkIfUserIsLogged() {
         if Auth.auth().currentUser != nil  {
             print("user is authenticated")
-    
+            
             getFollowedBooks { (success, response, error) in
                 if success {
                     let pick = response
                     self.followedBooks = pick as! [String]
-                    print(self.followedBooks)
-                    
                     self.downloadBooks { (success, response, error) in
                         if success {
                             let book = response as! Book
@@ -226,29 +211,18 @@ extension ReadingVC {
                             print("nothing found")
                             print (error)
                         }
-                        
                     }
-                    
-                    
-                   
                 } else if let error = error {
                     print (error)
                 }
             }
-setupFollowingCollectionView()
+            setupFollowingCollectionView()
             viewSetup()
-            
-            
-
-            
         }else {
             print("user is NOT authenticated")
             viewSetupGuest()
         }
-        
     }
-    
-    
 }
 
 //MARK:- CollectionView Properties
@@ -271,21 +245,19 @@ extension ReadingVC {
         followingCV.register(followingCell.self, forCellWithReuseIdentifier: "followingCell")
         mainView.addSubview(followingCV)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       print(booksFollowedByUser.count)
+        print(booksFollowedByUser.count)
         return booksFollowedByUser.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-    
         let size = CGSize(width: 110, height: 170)
         return size
-        
     }
+    
     func numberOfItems(inSection section: Int) -> Int {
         return 3
     }
@@ -305,9 +277,7 @@ extension ReadingVC {
         cell.addSubview(cell.bookTitleLbl)
         cell.addSubview(cell.bookAuthorLbl)
         return cell
-        
     }
-
 }
 
 //MARK:- Download Properties
@@ -336,13 +306,8 @@ extension ReadingVC {
                     print(aBook.title)
                 }
             }
-            
-            
         }
-
     }
-    
-    
     
     func getFollowedBooks(completion: @escaping (Bool, Any?, Error?) -> Void) {
         let db = Firestore.firestore().collection("users").document(userUid!)
@@ -356,6 +321,5 @@ extension ReadingVC {
                 print("Document does not exist")
             }
         }
-
     }
 }

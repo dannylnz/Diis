@@ -14,4 +14,6 @@ class settingsTableViewCell: UITableViewCell {
     
     var cellImage = UIImageView()
     
+    var logOutBtn = UIButton()
+    
 }
