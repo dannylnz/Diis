@@ -106,6 +106,10 @@ extension LoginVC {
                 self.showAlert(title: error.localizedDescription, message: "")
             }
             if user != nil {
+                
+                let tabBar = TabBarController()
+                self.reloadInputViews()
+                self.navigationController?.present(tabBar, animated: true, completion: nil)
                 self.showAlert(title: "User Login", message: "")
             }
         })

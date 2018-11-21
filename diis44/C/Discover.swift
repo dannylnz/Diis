@@ -9,11 +9,13 @@ class Discover: UIViewController,UICollectionViewDelegate,UICollectionViewDataSo
     let mainView = UIScrollView()
     var picksCV:UICollectionView!
     var popularStoriesCV:UICollectionView!
+    var featuredStoriesCV:UICollectionView!
     private var picksCategory = [Category]()
     private var popularStoriesCategory = [Book]()
 
     override func viewDidLoad() {
         self.title = "Discover"
+        navigationController?.tabBarController?.tabBar.isHidden = false
         tabBarController?.tabBar.isHidden = false
         super.viewDidLoad()
         downloadPopularStories { (success, response, error) in
@@ -36,6 +38,7 @@ class Discover: UIViewController,UICollectionViewDelegate,UICollectionViewDataSo
         }
         setupCollectionView()
         setupPopularStoriesCollectionView()
+        setupFeaturedStoriesCollectionView()
         viewSetup()
 
     }
@@ -45,6 +48,7 @@ class Discover: UIViewController,UICollectionViewDelegate,UICollectionViewDataSo
     override func viewDidAppear(_ animated: Bool) {
         self.title = "Discover"
         tabBarController?.tabBar.isHidden = false
+        
 
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -74,8 +78,8 @@ extension Discover {
         mainView.addSubview(popularStoriesLabel)
         popularStoriesLabel.text = "Popular Stories"
         popularStoriesLabel.textAlignment = .left
-        popularStoriesLabel.font = UIFont(name: "Avenir", size: 18.0)
-        popularStoriesLabel.textColor = UIColor.black
+        popularStoriesLabel.font = UIFont(name: "Baskerville", size: 18.0)
+        popularStoriesLabel.textColor = UIColor.darkGray
         popularStoriesLabel.snp.makeConstraints { (make) in
             make.height.greaterThanOrEqualTo(40)
             make.width.greaterThanOrEqualTo(200)
@@ -84,21 +88,27 @@ extension Discover {
         }
         popularStoriesCV.snp.makeConstraints { (make) in
             make.top.equalTo(popularStoriesLabel.snp.bottom)
-            make.left.equalToSuperview().offset(20)
+            make.left.equalToSuperview().offset(5)
             make.width.equalToSuperview()
             make.height.equalTo(220)
         }
         let moreToExploreLabel = UILabel()
         mainView.addSubview(moreToExploreLabel)
-        moreToExploreLabel.text = "More to Explore"
+        moreToExploreLabel.text = "Featured Stories"
         moreToExploreLabel.textAlignment = .left
-        moreToExploreLabel.font = UIFont(name: "BodoniSvtyTwoOSITCTT-Bold", size: 30.0)
+        moreToExploreLabel.font = UIFont(name: "Baskerville-Bold", size: 30.0)
         moreToExploreLabel.textColor = UIColor.black
         moreToExploreLabel.snp.makeConstraints { (make) in
             make.height.greaterThanOrEqualTo(40)
             make.width.greaterThanOrEqualTo(200)
             make.left.equalTo(mainView).offset(5)
             make.top.equalTo(popularStoriesCV.snp.bottom)
+        }
+        //featuredStoriesCV
+        featuredStoriesCV.snp.makeConstraints { (make) in
+            make.top.equalTo(moreToExploreLabel.snp.bottom)
+            make.width.equalToSuperview()
+            make.height.equalTo(220)
         }
     }
 }
@@ -139,16 +149,40 @@ extension Discover {
         popularStoriesCV.backgroundColor = UIColor.white
         mainView.addSubview(popularStoriesCV)
     }
+    //MARK:- FeaturedStoriesCV
+    func setupFeaturedStoriesCollectionView() {
+        //layoutCollectionView
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.sectionInset = UIEdgeInsetsMake(0, 5, 0, 5)
+        layout.minimumLineSpacing = 10.0
+        layout.minimumInteritemSpacing = 3.0
+        featuredStoriesCV = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        featuredStoriesCV.isPagingEnabled = false
+        featuredStoriesCV.dataSource = self
+        featuredStoriesCV.delegate = self
+        featuredStoriesCV.tag = 2
+        featuredStoriesCV.backgroundColor = .white
+        featuredStoriesCV.alwaysBounceHorizontal = true
+        featuredStoriesCV.showsHorizontalScrollIndicator = false
+        featuredStoriesCV.register(featuredCell.self, forCellWithReuseIdentifier: "featuredStoriesCell")
+        mainView.addSubview(featuredStoriesCV)
+    }
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         switch collectionView.tag {
         case 0:
-            let size = CGSize(width: 220, height: 110)
+            let size = CGSize(width: 220, height: picksCV.bounds.size.height - 5)
             return size
         case 1:
             let size = CGSize(width: 110, height: 160)
+            return size
+        case 2:
+            //todo cell card
+            let size = CGSize(width: featuredStoriesCV.bounds.size.width - 40, height: featuredStoriesCV.bounds.size.height - 20)
+            
             return size
         default:
             break
@@ -162,6 +196,10 @@ extension Discover {
             return picksCategory.count
         case 1:
             return popularStoriesCategory.count
+            
+        case 2:
+            //todo featuredCell. count
+            return 2
         default:
             break
         }
@@ -174,11 +212,10 @@ extension Discover {
             cell.categoryName.text = picksCategory[indexPath.row].categoryName
             cell.image.downloadedFrom(link: picksCategory[indexPath.row].categoryImage)
             cell.backgroundView = cell.image
-            cell.dropShadow()
             cell.image.layer.masksToBounds = true
             cell.image.contentMode = .scaleAspectFill
-            cell.layer.cornerRadius = 12.0
-            cell.image.layer.cornerRadius = 12.0
+            cell.layer.cornerRadius = 20.0
+            cell.image.layer.cornerRadius = 20.0
             
             cell.addSubview(cell.image)
             cell.addSubview(cell.categoryName)
@@ -196,6 +233,7 @@ extension Discover {
             cell.image.downloadedFrom(link: popularStoriesCategory[indexPath.row].coverImage)
             cell.image.layer.masksToBounds = true
             cell.image.contentMode = .scaleAspectFill
+            cell.image.layer.cornerRadius = 12.0
             cell.layer.cornerRadius = 12.0
             cell.addSubview(cell.image)
             cell.addSubview(cell.bookTitleLbl)
@@ -219,7 +257,22 @@ extension Discover {
                 make.top.equalTo(cell.bookTitleLbl.snp.bottom).offset(-3)
             }
             return cell
-            
+        case 2:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "featuredStoriesCell", for: indexPath) as! featuredCell
+            cell.categoryName.text = "This is a test"
+            cell.categoryDescription.text =  "This is another test for a description"
+            cell.addGradientBackground(firstColor: UIColor(rgb: 0x659999), secondColor: UIColor(rgb: 0xf4791f))
+            cell.layer.cornerRadius = 20.0
+            cell.addSubview(cell.categoryName)
+            cell.addSubview(cell.categoryDescription)
+            cell.categoryName.snp.makeConstraints { (make) in
+                make.height.greaterThanOrEqualTo(40)
+                make.width.equalTo(cell.snp.width)
+                make.centerX.equalTo(cell.snp.centerX)
+                make.centerY.equalTo(cell.snp.centerY)
+            }
+            return cell
+      
         default:
             fatalError()
         }
@@ -229,13 +282,18 @@ extension Discover {
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let vc = CategoryVC()
-        vc.categoryNameLabel.text = picksCategory[indexPath.row].categoryName
-        vc.CATEGORY_NAME = picksCategory[indexPath.row].category
-        vc.tabBarController?.title = picksCategory[indexPath.row].categoryName
-        UINavigationBar.appearance().isHidden = true
-        navigationController?.pushViewController(vc, animated: true)
+        switch collectionView.tag {
+        case 0:
+            let vc = CategoryVC()
+            vc.categoryNameLabel.text = picksCategory[indexPath.row].categoryName
+            vc.CATEGORY_NAME = picksCategory[indexPath.row].category
+            vc.tabBarController?.title = picksCategory[indexPath.row].categoryName
+            UINavigationBar.appearance().isHidden = true
+            navigationController?.pushViewController(vc, animated: true)
+        default:
+            break
+        }
+
         
     }
 }

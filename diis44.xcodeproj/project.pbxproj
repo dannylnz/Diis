@@ -16,6 +16,8 @@
 		643B725A219F3A7200DF867F /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643B7259219F3A7200DF867F /* SignUpVC.swift */; };
 		643B725C219F3D2200DF867F /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643B725B219F3D2200DF867F /* LoginVC.swift */; };
 		643B726321A3120E00DF867F /* followingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643B726221A3120E00DF867F /* followingCell.swift */; };
+		643B726521A4B7CB00DF867F /* BaseRoundedCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643B726421A4B7CB00DF867F /* BaseRoundedCardCell.swift */; };
+		643B726721A4B9CA00DF867F /* featuredCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643B726621A4B9CA00DF867F /* featuredCell.swift */; };
 		6480AAA7215D070C00B2EF85 /* chapterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6480AAA6215D070C00B2EF85 /* chapterCell.swift */; };
 		6480AAA9215D2D6900B2EF85 /* readerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6480AAA8215D2D6900B2EF85 /* readerVC.swift */; };
 		64A1B2E1219CB6820095F6B3 /* popularStoriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A1B2E0219CB6810095F6B3 /* popularStoriesCell.swift */; };
@@ -44,6 +46,8 @@
 		643B725B219F3D2200DF867F /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		643B725F219F82A300DF867F /* diis44.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = diis44.entitlements; sourceTree = "<group>"; };
 		643B726221A3120E00DF867F /* followingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = followingCell.swift; sourceTree = "<group>"; };
+		643B726421A4B7CB00DF867F /* BaseRoundedCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRoundedCardCell.swift; sourceTree = "<group>"; };
+		643B726621A4B9CA00DF867F /* featuredCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = featuredCell.swift; sourceTree = "<group>"; };
 		6480AAA6215D070C00B2EF85 /* chapterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chapterCell.swift; sourceTree = "<group>"; };
 		6480AAA8215D2D6900B2EF85 /* readerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = readerVC.swift; sourceTree = "<group>"; };
 		64A1B2E0219CB6810095F6B3 /* popularStoriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popularStoriesCell.swift; sourceTree = "<group>"; };
@@ -84,12 +88,12 @@
 			path = "New Group";
 			sourceTree = "<group>";
 		};
-		643B724F219F0B5900DF867F /* Profile */ = {
+		643B724F219F0B5900DF867F /* Reading */ = {
 			isa = PBXGroup;
 			children = (
 				643B7253219F117500DF867F /* ReadingVC.swift */,
 			);
-			path = Profile;
+			path = Reading;
 			sourceTree = "<group>";
 		};
 		643B7250219F0BFC00DF867F /* SignUp */ = {
@@ -140,7 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				643B7250219F0BFC00DF867F /* SignUp */,
-				643B724F219F0B5900DF867F /* Profile */,
+				643B724F219F0B5900DF867F /* Reading */,
 				643B724E219DB5AA00DF867F /* Elements */,
 				64B99EB2215BFD550040E12A /* Cells */,
 				64B99E96215AF0780040E12A /* Discover.swift */,
@@ -169,6 +173,8 @@
 				642BBAFC215C48F5000F32F4 /* bookCell.swift */,
 				6480AAA6215D070C00B2EF85 /* chapterCell.swift */,
 				643B726221A3120E00DF867F /* followingCell.swift */,
+				643B726421A4B7CB00DF867F /* BaseRoundedCardCell.swift */,
+				643B726621A4B9CA00DF867F /* featuredCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -355,7 +361,9 @@
 				64B99E97215AF0780040E12A /* Discover.swift in Sources */,
 				64B99EAC215BBC610040E12A /* TabBarController.swift in Sources */,
 				643B724D219DB5A300DF867F /* fontSettingsView.swift in Sources */,
+				643B726721A4B9CA00DF867F /* featuredCell.swift in Sources */,
 				64B99E95215AF0780040E12A /* AppDelegate.swift in Sources */,
+				643B726521A4B7CB00DF867F /* BaseRoundedCardCell.swift in Sources */,
 				642BBAFF215CD7D2000F32F4 /* BookVC.swift in Sources */,
 				6480AAA7215D070C00B2EF85 /* chapterCell.swift in Sources */,
 				642BBAFD215C48F5000F32F4 /* bookCell.swift in Sources */,

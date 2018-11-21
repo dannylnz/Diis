@@ -163,13 +163,13 @@ extension SignUpVC{
         //SignInBtn
         signInBtn.setTitle("Sign in", for: .normal)
         signInBtn.layer.cornerRadius = 4.0
-        signInBtn.backgroundColor = UIColor.init(rgb: 0x3b5998)
+        signInBtn.backgroundColor = UIColor.black
         signInBtn.addTarget(self, action: #selector(signInBtnClicked), for: .touchUpInside)
         mainView.addSubview(signInBtn)
         signInBtn.snp.makeConstraints { (make) in
             make.height.equalTo(36)
             make.width.equalTo(200)
-            make.top.equalTo(AlreadyhaveAnAccountLabel.snp.bottom).offset(6)
+            make.top.equalTo(AlreadyhaveAnAccountLabel.snp.bottom).offset(3)
             make.centerX.equalTo(mainView.snp.centerX)
         }
         

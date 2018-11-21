@@ -138,7 +138,7 @@ extension ReadingVC {
         //SignInBtn
         signInBtn.setTitle("Sign in", for: .normal)
         signInBtn.layer.cornerRadius = 4.0
-        signInBtn.backgroundColor = UIColor.init(rgb: 0x3b5998)
+        signInBtn.backgroundColor = UIColor.black
         signInBtn.addTarget(self, action: #selector(signInBtnClicked), for: .touchUpInside)
         mainView.addSubview(signInBtn)
         signInBtn.snp.makeConstraints { (make) in
@@ -180,8 +180,9 @@ extension ReadingVC {
         } catch  {
             
         }
-        let discoverVC = Discover()
-       tabBarController?.present(discoverVC, animated: true, completion: nil)
+      
+        let tabBar = TabBarController()
+       self.navigationController?.present(tabBar, animated: true, completion: nil)
   
     }
     fileprivate func checkIfUserIsLogged() {
@@ -235,7 +236,7 @@ extension ReadingVC {
         //layoutCollectionView
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsetsMake(10, 10, 40, 10)
+        layout.sectionInset = UIEdgeInsetsMake(10, 5, 40, 5)
         layout.minimumLineSpacing = 15.0
         layout.minimumInteritemSpacing = 12.0
         followingCV = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
@@ -259,7 +260,7 @@ extension ReadingVC {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
     
-        let size = CGSize(width: 100, height: 170)
+        let size = CGSize(width: 110, height: 170)
         return size
         
     }
