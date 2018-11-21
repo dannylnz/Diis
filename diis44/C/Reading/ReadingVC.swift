@@ -11,6 +11,7 @@ class ReadingVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataS
         let facebookBtn = UIButton()
         let mailBtn = UIButton()
         let logoutBtn = UIButton()
+        let settingsBtn = UIButton()
         let signInBtn = UIButton()
         let onboardingImage = UIImageView()
         let userUid = Auth.auth().currentUser?.uid
@@ -34,6 +35,18 @@ class ReadingVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataS
 extension ReadingVC {
     
     
+    func addSettingsBtn(){
+        settingsBtn.setImage(UIImage(named: "settings"), for: .normal)
+        //add function for button
+        settingsBtn.addTarget(self, action: #selector(settingsBtnClicked), for: .touchUpInside)
+        //set frame
+        settingsBtn.snp.makeConstraints { (make) in
+            make.height.width.equalTo(25)
+        }
+        let settingsBarButton = UIBarButtonItem(customView: settingsBtn)
+        navigationItem.rightBarButtonItem = settingsBarButton
+    }
+    
     func viewSetup() {
         mainView.backgroundColor = UIColor.white
         navigationController?.title = "Reading"
@@ -49,8 +62,8 @@ extension ReadingVC {
             make.width.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
         }
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "logout", style: .plain, target: self, action: #selector(logOutBtnClicked))
         
+        addSettingsBtn()
     }
     
     func viewSetupGuest() {
@@ -62,6 +75,7 @@ extension ReadingVC {
             make.bottom.equalToSuperview()
             make.width.equalToSuperview()
         }
+        addSettingsBtn()
         //OnboardingImage
         onboardingImage.image = img
         onboardingImage.contentMode = .scaleAspectFill
@@ -158,6 +172,14 @@ extension ReadingVC {
         loginVC.modalPresentationStyle = .overCurrentContext
         UINavigationBar.appearance().isHidden = true
         navigationController?.pushViewController(loginVC, animated: true)
+    }
+    
+    @objc func settingsBtnClicked(){
+        //Todo:open Collectionview with settings
+        //remove logout
+        let settingsVC = SettingsVC()
+        navigationController?.pushViewController(settingsVC, animated: true)
+        print("setting Btn Clicked -")
     }
     
     @objc func facebookBtnClicked() {

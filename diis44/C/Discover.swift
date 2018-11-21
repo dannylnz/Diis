@@ -10,8 +10,10 @@ class Discover: UIViewController,UICollectionViewDelegate,UICollectionViewDataSo
     var picksCV:UICollectionView!
     var popularStoriesCV:UICollectionView!
     var featuredStoriesCV:UICollectionView!
+    var books = [Book]()
     private var picksCategory = [Category]()
     private var popularStoriesCategory = [Book]()
+    private var featuredStoriesCategory = [Category]()
 
     override func viewDidLoad() {
         self.title = "Discover"
@@ -22,6 +24,7 @@ class Discover: UIViewController,UICollectionViewDelegate,UICollectionViewDataSo
             if success {
                 let pick = response as! Book
                 self.popularStoriesCategory.append(pick)
+                self.books.append(pick)
                 self.popularStoriesCV.reloadData()
             } else if let error = error {
                 print (error)
@@ -32,6 +35,15 @@ class Discover: UIViewController,UICollectionViewDelegate,UICollectionViewDataSo
                 let pick = response as! Category
                 self.picksCategory.append(pick)
                 self.picksCV.reloadData()
+            } else if let error = error {
+                print (error)
+            }
+        }
+        downloadFeaturedStories { (success, response, error) in
+            if success {
+                let pick = response as! Category
+                self.featuredStoriesCategory.append(pick)
+                self.featuredStoriesCV.reloadData()
             } else if let error = error {
                 print (error)
             }
@@ -105,10 +117,11 @@ extension Discover {
             make.top.equalTo(popularStoriesCV.snp.bottom)
         }
         //featuredStoriesCV
+//        let tabBarHeight = tabBarController?.tabBar.bounds.size.height ?? 0
         featuredStoriesCV.snp.makeConstraints { (make) in
             make.top.equalTo(moreToExploreLabel.snp.bottom)
             make.width.equalToSuperview()
-            make.height.equalTo(220)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
         }
     }
 }
@@ -196,10 +209,8 @@ extension Discover {
             return picksCategory.count
         case 1:
             return popularStoriesCategory.count
-            
         case 2:
-            //todo featuredCell. count
-            return 2
+            return featuredStoriesCategory.count
         default:
             break
         }
@@ -259,18 +270,31 @@ extension Discover {
             return cell
         case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "featuredStoriesCell", for: indexPath) as! featuredCell
-            cell.categoryName.text = "This is a test"
-            cell.categoryDescription.text =  "This is another test for a description"
-            cell.addGradientBackground(firstColor: UIColor(rgb: 0x659999), secondColor: UIColor(rgb: 0xf4791f))
+            cell.categoryName.text = featuredStoriesCategory[indexPath.row].categoryName
+            cell.categoryDescription.text =  featuredStoriesCategory[indexPath.row].categoryDescription
+            cell.image.downloadedFrom(link: featuredStoriesCategory[indexPath.row].categoryImage)
+            cell.image.layer.masksToBounds = true
+            cell.image.contentMode = .scaleAspectFill
+            cell.backgroundView = cell.image
+            cell.image.layer.cornerRadius = 20.0
             cell.layer.cornerRadius = 20.0
+            cell.addSubview(cell.image)
             cell.addSubview(cell.categoryName)
             cell.addSubview(cell.categoryDescription)
             cell.categoryName.snp.makeConstraints { (make) in
-                make.height.greaterThanOrEqualTo(40)
-                make.width.equalTo(cell.snp.width)
-                make.centerX.equalTo(cell.snp.centerX)
-                make.centerY.equalTo(cell.snp.centerY)
+                make.height.lessThanOrEqualTo(40)
+                make.width.greaterThanOrEqualTo(40)
+                make.top.equalTo(cell.snp.centerY)
+                make.left.equalTo(cell.snp.left).offset(5)
             }
+            cell.categoryDescription.snp.makeConstraints { (make) in
+                make.height.greaterThanOrEqualTo(40)
+                make.left.equalTo(cell.categoryName.snp.left)
+                make.right.equalTo(cell.snp.right).offset(-20)
+                make.top.equalTo(cell.categoryName.snp.bottom).offset(1)
+                
+            }
+            
             return cell
       
         default:
@@ -290,6 +314,19 @@ extension Discover {
             vc.tabBarController?.title = picksCategory[indexPath.row].categoryName
             UINavigationBar.appearance().isHidden = true
             navigationController?.pushViewController(vc, animated: true)
+        case 1:
+            let vc = BookVC()
+            vc.hidesBottomBarWhenPushed = true
+            vc.book = books[indexPath.row]
+            vc.ImageLink = books[indexPath.row].coverImage
+            vc.bookAuthor = books[indexPath.row].author
+            vc.bookTitle = books[indexPath.row].title
+            vc.bookPlot = books[indexPath.row].plot
+            vc.tabBarController?.title? = ""
+            vc.CATEGORY_NAME = books[indexPath.row].category
+            vc.bookId = books[indexPath.row].root
+            vc.bookLink = "/category/\(vc.CATEGORY_NAME)/books/\(books[indexPath.row].root)"
+            self.navigationController?.pushViewController(vc, animated: true)
         default:
             break
         }
@@ -341,6 +378,28 @@ extension Discover {
             }
         }
     }
+    
+    //This function downloads the featured categories ---/featured
+    func downloadFeaturedStories(completion: @escaping (Bool, Any?, Error?) -> Void) {
+        let db = Firestore.firestore().collection("featured")
+        db.getDocuments { (snapshot, error) in
+            if let err = error {
+                debugPrint("there was an error : \(err)")
+            } else {
+                for document in (snapshot?.documents)! {
+                    let categoryImage = document["categoryImage"] as! String
+                    let categoryDescription = document["categoryDescription"] as! String
+                    let categoryName = document["categoryName"] as! String
+                    let category = document.documentID
+                    let aCategory = Category(categoryDescription: categoryDescription,categoryImage:categoryImage, categoryName:categoryName, category: category)
+                    completion(true,aCategory,nil)
+                }
+            }
+        }
+    }
+    
+    //This function downloads the book to be shown from Popular Stories
+
 }
 // NavBar Setup
 extension Discover {

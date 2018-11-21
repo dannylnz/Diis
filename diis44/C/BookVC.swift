@@ -191,8 +191,7 @@ extension BookVC {
                     ])
                  print ("Book added to user list")
                 followBtn.isSelected = false
-            default:
-                break
+          
             }
  
         } else {
@@ -339,17 +338,13 @@ extension BookVC {
                 followBtn.setTitle("Following", for: .normal)
                 followBtn.layer.cornerRadius = 4.0
                 followBtn.titleLabel?.font = UIFont(name: "Avenir-Heavy", size: 15)
-            
-            
+    
         case false:
             followBtn.backgroundColor = .blue
             followBtn.setTitle("Follow", for: .normal)
             followBtn.layer.cornerRadius = 4.0
             followBtn.titleLabel?.font = UIFont(name: "Avenir-Heavy", size: 15)
             
-            
-        default:
-            break
         }
         
         

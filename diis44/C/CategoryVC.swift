@@ -38,11 +38,6 @@ class CategoryVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
 }
 
-
-
-
-
-
 //DownloadBooks
 extension CategoryVC{
     func downloadBooks(completion: @escaping (Bool, Any?, Error?) -> Void) {
@@ -69,19 +64,6 @@ extension CategoryVC{
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 //viewSetup
 extension CategoryVC {
     func viewSetup() {
@@ -101,24 +83,6 @@ extension CategoryVC {
         
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //collection View
 extension CategoryVC {
     func setupCollectionView() {
@@ -212,6 +176,4 @@ extension CategoryVC {
         vc.bookLink = "/category/\(vc.CATEGORY_NAME)/books/\(books[indexPath.row].root)"
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
 }
