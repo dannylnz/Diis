@@ -34,6 +34,7 @@
 		64EA07C021A5B0C100C320AC /* PopularBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EA07BF21A5B0C100C320AC /* PopularBook.swift */; };
 		64EA07C221A5BD8900C320AC /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EA07C121A5BD8900C320AC /* SettingsVC.swift */; };
 		64EA07C421A5C05900C320AC /* settingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EA07C321A5C05900C320AC /* settingsTableViewCell.swift */; };
+		64EA07C621A6134E00C320AC /* FeaturedCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EA07C521A6134E00C320AC /* FeaturedCategoryVC.swift */; };
 		D4C22EC8347F4BB1F74CB972 /* Pods_diis44.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A677F02A93CE5BF350D0DDE3 /* Pods_diis44.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +70,7 @@
 		64EA07BF21A5B0C100C320AC /* PopularBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularBook.swift; sourceTree = "<group>"; };
 		64EA07C121A5BD8900C320AC /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		64EA07C321A5C05900C320AC /* settingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsTableViewCell.swift; sourceTree = "<group>"; };
+		64EA07C521A6134E00C320AC /* FeaturedCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCategoryVC.swift; sourceTree = "<group>"; };
 		A677F02A93CE5BF350D0DDE3 /* Pods_diis44.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_diis44.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF3404D7F63899B7AD8B382C /* Pods-diis44.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-diis44.debug.xcconfig"; path = "Pods/Target Support Files/Pods-diis44/Pods-diis44.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -160,6 +162,7 @@
 				642BBAFE215CD7D2000F32F4 /* BookVC.swift */,
 				64EA07BF21A5B0C100C320AC /* PopularBook.swift */,
 				6480AAA8215D2D6900B2EF85 /* readerVC.swift */,
+				64EA07C521A6134E00C320AC /* FeaturedCategoryVC.swift */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				643B726721A4B9CA00DF867F /* featuredCell.swift in Sources */,
 				64B99E95215AF0780040E12A /* AppDelegate.swift in Sources */,
 				643B726521A4B7CB00DF867F /* BaseRoundedCardCell.swift in Sources */,
+				64EA07C621A6134E00C320AC /* FeaturedCategoryVC.swift in Sources */,
 				64EA07C421A5C05900C320AC /* settingsTableViewCell.swift in Sources */,
 				642BBAFF215CD7D2000F32F4 /* BookVC.swift in Sources */,
 				6480AAA7215D070C00B2EF85 /* chapterCell.swift in Sources */,

@@ -9,7 +9,7 @@ class SignUpVC: UIViewController {
     let db = Firestore.firestore()
     var ref: DocumentReference?
     let mainView = UIScrollView()
-
+    
     //textFields
     let emailTF = UITextField()
     let nameTF = UITextField()
@@ -28,22 +28,9 @@ class SignUpVC: UIViewController {
         super.viewDidLoad()
         signUpBtn.addTarget(self, action: #selector(signUpBtnClicked), for: .touchUpInside)
         viewSetup()
-        
-        test()
     }
     
-    func test(){
-        db.collection("users").getDocuments { (snap, error) in
-            
-            for document in snap!.documents {
-                print("\(document.documentID) => \(document.data())")
-            }
-        
-        }
-        
-    }
 }
-
 
 //MARK:- UISetup
 extension SignUpVC{
@@ -57,7 +44,7 @@ extension SignUpVC{
             make.width.equalToSuperview()
             
         }
-      //emailTF
+        //emailTF
         emailTF.font = signFont
         emailTF.clearButtonMode = .whileEditing
         emailTF.borderStyle = .roundedRect
@@ -174,7 +161,7 @@ extension SignUpVC{
         }
         
         
-       
+        
     }
 }
 extension SignUpVC{
@@ -189,48 +176,43 @@ extension SignUpVC{
     }
     
     @objc func signUpBtnClicked(){
-        
-       guard emailTF.text != "", nameTF.text != "" , passwordTF.text != "",confirmPasswordTF.text != "" else {
-        self.showAlert(title: "fill the empty fields 😵", message: "")
-        return
+        guard emailTF.text != "", nameTF.text != "" , passwordTF.text != "",confirmPasswordTF.text != "" else {
+            self.showAlert(title: "fill the empty fields 😵", message: "")
+            return
         }
         
         if passwordTF.text == confirmPasswordTF.text {
-            
             Auth.auth().createUser(withEmail: emailTF.text!, password: passwordTF.text!, completion: { (user, error) in
                 if let error = error {
                     self.showAlert(title: error.localizedDescription, message: "")
                     print(error.localizedDescription)
                 } else if let user = user {
                     
-                        let dbRef = Firestore.firestore()
-                        let changeRequest = Auth.auth().currentUser!.createProfileChangeRequest()
-                        changeRequest.displayName = self.nameTF.text!
-                        changeRequest.commitChanges(completion: nil)
-                        let userInfo : [String: Any] = ["uid": user.user.uid,
-                                                        "name" : self.nameTF.text!,
-                                                        "mail": self.emailTF.text!]
-          
+                    let dbRef = Firestore.firestore()
+                    let changeRequest = Auth.auth().currentUser!.createProfileChangeRequest()
+                    changeRequest.displayName = self.nameTF.text!
+                    changeRequest.commitChanges(completion: nil)
+                    let userInfo : [String: Any] = ["uid": user.user.uid,
+                                                    "name" : self.nameTF.text!,
+                                                    "mail": self.emailTF.text!,
+                                                    "following": [NSArray]()]
+                    
                     dbRef.collection("users").document("\(user.user.uid)").setData(userInfo, merge: true, completion: { (error) in
                         if let error = error {print (error.localizedDescription) //TODO - Message:cannot make your registration, Sorry! :(}
                         } else {
                             
                             self.showAlert(title: "Sign up successful", message: "")
-                        
+                            let tabBar = TabBarController()
+                            self.reloadInputViews()
+                            self.navigationController?.present(tabBar, animated: true, completion: nil)
                         }
                     })
-                    
- 
-            
                 }
             }
             )}
-}
-    
-
+    }
     
     func showAlert(title: String, message: String){
-        
         let alert = UIAlertController(title: title,message: message, preferredStyle: .alert)
         // Accessing alert view backgroundColor :
         alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = UIColor.white
@@ -241,11 +223,6 @@ extension SignUpVC{
             
         }
     }
-    
- 
-    
-    
-    
 }
 
 

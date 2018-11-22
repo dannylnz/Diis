@@ -3,26 +3,27 @@ import UIKit
 import FirebaseFirestore
 import ReadMoreTextView
 
-class CategoryVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
-
+class FeaturedCategoryVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+    
     let mainView = UIScrollView()
     let categoryNameLabel = UILabel()
     let categoryCoverImage = UIImageView()
+    var categoryCoverImageLink = ""
     var booksCollectionView: UICollectionView!
     var books = [Book]()
     var CATEGORY_NAME = ""
     var bookId = ""
-
-
+    
+    
     override func viewDidAppear(_ animated: Bool) {
-       tabBarController?.tabBar.isHidden = true
+        tabBarController?.tabBar.isHidden = true
     }
     override func viewDidDisappear(_ animated: Bool) {
-         tabBarController?.tabBar.isHidden = false
+        tabBarController?.tabBar.isHidden = false
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         downloadBooks { (success, response, error) in
             if success {
                 let book = response as! Book
@@ -39,9 +40,9 @@ class CategoryVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
 }
 
 //DownloadBooks
-extension CategoryVC{
+extension FeaturedCategoryVC{
     func downloadBooks(completion: @escaping (Bool, Any?, Error?) -> Void) {
-        let db = Firestore.firestore().collection("category").document(CATEGORY_NAME).collection("books")
+        let db = Firestore.firestore().collection("featured").document(CATEGORY_NAME).collection("books")
         db.getDocuments { (snapshot, error) in
             if let err = error {
                 debugPrint("there was an error : \(err)")
@@ -65,26 +66,34 @@ extension CategoryVC{
 
 
 //viewSetup
-extension CategoryVC {
+extension FeaturedCategoryVC {
     func viewSetup() {
         self.view.addSubview(mainView)
         mainView.backgroundColor = UIColor.white
         mainView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+        make.edges.equalToSuperview()
+        }
+        categoryCoverImage.contentMode = .scaleAspectFill
+        categoryCoverImage.backgroundColor = .red
+        categoryCoverImage.downloadedFrom(link: categoryCoverImageLink)
+        mainView.addSubview(categoryCoverImage)
+        categoryCoverImage.snp.makeConstraints { (make) in
+            make.top.equalTo(mainView.snp.top)
+            make.width.equalTo(mainView.snp.width)
+            make.height.equalTo(200)
         }
         booksCollectionView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            make.top.equalTo(categoryCoverImage.snp.bottom).offset(50)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
             make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left)
             make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right)
-
         }
         
         
     }
 }
 //collection View
-extension CategoryVC {
+extension FeaturedCategoryVC {
     func setupCollectionView() {
         //layoutCollectionView
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -95,13 +104,9 @@ extension CategoryVC {
         booksCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         booksCollectionView.dataSource = self
         booksCollectionView.delegate = self
+        booksCollectionView.alwaysBounceVertical = true
         booksCollectionView.register(bookCell.self, forCellWithReuseIdentifier: "booksCell")
-        let bglink = UIImage(named: "bgcateg")
-        let categoryBG = UIImageView(image: bglink)
-        booksCollectionView.backgroundColor = .white
-        booksCollectionView.backgroundView = categoryBG
-        categoryBG.alpha = 0.1
-        categoryBG.contentMode = .scaleAspectFill
+        booksCollectionView.backgroundColor = UIColor.white
         mainView.addSubview(booksCollectionView)
     }
     
@@ -148,7 +153,7 @@ extension CategoryVC {
         }
         cell.title.text = books[indexPath.row].title
         // cell - Author
-          cell.author.snp.makeConstraints { (make) in
+        cell.author.snp.makeConstraints { (make) in
             make.left.equalTo(cell.image.snp.right).offset(10)
             make.top.equalTo(cell.title.snp.bottom).offset(1)
             make.width.lessThanOrEqualTo(100)

@@ -11,7 +11,7 @@ class SettingsVC: UIViewController, UITableViewDelegate,UITableViewDataSource {
     var settingsTV = UITableView()
     let logOutBtn = UIButton()
     let userUid = Auth.auth().currentUser?.uid
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Reading"
@@ -23,7 +23,7 @@ class SettingsVC: UIViewController, UITableViewDelegate,UITableViewDataSource {
 extension SettingsVC {
     
     func viewSetup() {
-        mainView.backgroundColor = UIColor.blue
+        mainView.backgroundColor = UIColor.white
         navigationController?.title = "Settings"
         view.addSubview(mainView)
         mainView.snp.updateConstraints { (make) in
@@ -100,8 +100,11 @@ extension SettingsVC {
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "settingsTableViewCell", for: indexPath) as! settingsTableViewCell
             cell.title.text = settingsTVCategories[indexPath.row]
+            cell.accessoryType = .disclosureIndicator
             cell.addSubview(cell.title)
             cell.title.snp.makeConstraints { (make) in
+                make.left.equalTo(cell.snp.left).offset(5)
+                make.centerY.equalTo(cell.snp.centerY)
                 cell.title.sizeToFit()
             }
             setupLogOutBtn()

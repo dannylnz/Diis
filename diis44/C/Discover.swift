@@ -285,15 +285,26 @@ extension Discover {
                 make.height.lessThanOrEqualTo(40)
                 make.width.greaterThanOrEqualTo(40)
                 make.top.equalTo(cell.snp.centerY)
-                make.left.equalTo(cell.snp.left).offset(5)
+                make.left.equalTo(cell.snp.left).offset(15)
+            }
+            let divider = UIView()
+            divider.backgroundColor = UIColor.white
+            divider.alpha = 0.4
+            cell.addSubview(divider)
+            divider.snp.makeConstraints { (make) in
+                make.height.equalTo(1)
+                make.width.equalTo(cell.snp.width).offset(-50)
+                make.left.equalTo(cell.categoryName.snp.left)
+                make.top.equalTo(cell.categoryName.snp.bottom).offset(1)
             }
             cell.categoryDescription.snp.makeConstraints { (make) in
                 make.height.greaterThanOrEqualTo(40)
                 make.left.equalTo(cell.categoryName.snp.left)
                 make.right.equalTo(cell.snp.right).offset(-20)
-                make.top.equalTo(cell.categoryName.snp.bottom).offset(1)
+                make.top.equalTo(divider.snp.bottom).offset(1)
                 
             }
+            
             
             return cell
       
@@ -327,6 +338,14 @@ extension Discover {
             vc.bookId = books[indexPath.row].root
             vc.bookLink = "/category/\(vc.CATEGORY_NAME)/books/\(books[indexPath.row].root)"
             self.navigationController?.pushViewController(vc, animated: true)
+        
+        case 2:
+            let vc = FeaturedCategoryVC()
+            vc.categoryCoverImageLink = featuredStoriesCategory[indexPath.row].categoryImage
+            vc.CATEGORY_NAME = featuredStoriesCategory[indexPath.row].category
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+            
         default:
             break
         }
