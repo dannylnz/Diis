@@ -12,8 +12,8 @@ class CategoryVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     var books = [Book]()
     var CATEGORY_NAME = ""
     var bookId = ""
-
-
+    let emptyDataImageLink = UIImage(named: "emptyData")
+    
     override func viewDidAppear(_ animated: Bool) {
        tabBarController?.tabBar.isHidden = true
     }
@@ -35,6 +35,7 @@ class CategoryVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         }
         setupCollectionView()
         viewSetup()
+        
     }
 }
 
@@ -96,12 +97,7 @@ extension CategoryVC {
         booksCollectionView.dataSource = self
         booksCollectionView.delegate = self
         booksCollectionView.register(bookCell.self, forCellWithReuseIdentifier: "booksCell")
-        let bglink = UIImage(named: "bgcateg")
-        let categoryBG = UIImageView(image: bglink)
         booksCollectionView.backgroundColor = .white
-        booksCollectionView.backgroundView = categoryBG
-        categoryBG.alpha = 0.1
-        categoryBG.contentMode = .scaleAspectFill
         mainView.addSubview(booksCollectionView)
     }
     
@@ -110,14 +106,18 @@ extension CategoryVC {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = CGSize(width: self.view.frame.width - 10, height: 130)
         return size
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return books.count
         
+//        if booksCollectionView.visibleCells.count == 0 {
+//            let emptyDataImage = UIImageView(image: emptyDataImageLink)
+//            emptyDataImage.contentMode = .scaleAspectFill
+//            booksCollectionView.backgroundView = emptyDataImage
+//        }
+        
+        return books.count
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "booksCell", for: indexPath) as! bookCell
