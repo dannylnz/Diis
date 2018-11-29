@@ -13,5 +13,6 @@ target 'diis44' do
     pod 'ReadMoreTextView'
     pod 'FolioReaderKit'
     pod 'CardsLayout'
+    pod 'Hero'
 
 end

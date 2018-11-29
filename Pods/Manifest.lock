@@ -106,6 +106,7 @@ PODS:
     - gRPC-Core (= 1.14.1)
     - gRPC-RxLibrary (= 1.14.1)
   - GTMSessionFetcher/Core (1.2.0)
+  - Hero (1.4.0)
   - JSQWebViewController (6.0.0)
   - leveldb-library (1.20)
   - MenuItemKit (3.0.0)
@@ -131,6 +132,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Firestore
   - FolioReaderKit
+  - Hero
   - ReadMoreTextView
   - SnapKit
 
@@ -155,6 +157,7 @@ SPEC REPOS:
     - gRPC-ProtoRPC
     - gRPC-RxLibrary
     - GTMSessionFetcher
+    - Hero
     - JSQWebViewController
     - leveldb-library
     - MenuItemKit
@@ -187,6 +190,7 @@ SPEC CHECKSUMS:
   gRPC-ProtoRPC: 78f976fc6a1eafc0e1f4965c255c313aa0859b1e
   gRPC-RxLibrary: c4c826507ad3c8c8fab6887f153938eb04b86d59
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
+  Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
   JSQWebViewController: 51041569b75d19dbb6b7fe0b7ae053c32409a9be
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   MenuItemKit: d9b539b28fdbbd7980d6f3668b9cd6daefeabd9b
@@ -199,6 +203,6 @@ SPEC CHECKSUMS:
   SSZipArchive: 14401ade5f8e82aba1ff03e9f88e9de60937ae60
   ZFDragableModalTransition: 0d294eaaba6edfcb9839595de765f9ca06a4b524
 
-PODFILE CHECKSUM: 2483bef489f5df65479e8a1a232654ec0d64a6e4
+PODFILE CHECKSUM: 2eb26c434a90681cc1517ad4ddab197d29d4357d
 
 COCOAPODS: 1.5.2

@@ -114,8 +114,6 @@ extension popUpRegistrationVC{
         mailBtn.pulsate()
         let signUpVC = SignUpVC()
         signUpVC.title = "Sign up with your email"
-        signUpVC.modalPresentationStyle = .overCurrentContext
-        UINavigationBar.appearance().isHidden = true
         navigationController?.pushViewController(signUpVC, animated: true)
     }
     

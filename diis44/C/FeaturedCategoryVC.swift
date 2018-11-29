@@ -2,6 +2,8 @@ import Firebase
 import UIKit
 import FirebaseFirestore
 import ReadMoreTextView
+import Hero
+
 
 class FeaturedCategoryVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
@@ -14,7 +16,6 @@ class FeaturedCategoryVC: UIViewController,UICollectionViewDelegate,UICollection
     var CATEGORY_NAME = ""
     var bookId = ""
     
-    
     override func viewDidAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
     }
@@ -23,7 +24,6 @@ class FeaturedCategoryVC: UIViewController,UICollectionViewDelegate,UICollection
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         downloadBooks { (success, response, error) in
             if success {
                 let book = response as! Book
@@ -82,6 +82,8 @@ extension FeaturedCategoryVC {
             make.width.equalTo(mainView.snp.width)
             make.height.equalTo(200)
         }
+
+
         booksCollectionView.snp.makeConstraints { (make) in
             make.top.equalTo(categoryCoverImage.snp.bottom).offset(50)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)

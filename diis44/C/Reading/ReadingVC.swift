@@ -52,7 +52,7 @@ extension ReadingVC {
         navigationController?.title = "Reading"
         view.addSubview(mainView)
         mainView.snp.updateConstraints { (make) in
-            make.top.equalTo(view.snp.top)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.bottom.equalToSuperview()
             make.width.equalToSuperview()
         }
@@ -68,6 +68,10 @@ extension ReadingVC {
     
     func viewSetupGuest() {
         mainView.backgroundColor = UIColor.white
+        navigationController?.navigationBar.barTintColor = UIColor.white
+        navigationController?.navigationBar.prefersLargeTitles = true
+        tabBarController?.tabBar.isTranslucent = false
+        tabBarController?.tabBar.barTintColor = .white
         navigationController?.title = "Reading"
         view.addSubview(mainView)
         mainView.snp.updateConstraints { (make) in

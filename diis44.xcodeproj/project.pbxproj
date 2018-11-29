@@ -35,6 +35,7 @@
 		64EA07C221A5BD8900C320AC /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EA07C121A5BD8900C320AC /* SettingsVC.swift */; };
 		64EA07C421A5C05900C320AC /* settingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EA07C321A5C05900C320AC /* settingsTableViewCell.swift */; };
 		64EA07C621A6134E00C320AC /* FeaturedCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EA07C521A6134E00C320AC /* FeaturedCategoryVC.swift */; };
+		64EA07C821A80A3E00C320AC /* Discover+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EA07C721A80A3E00C320AC /* Discover+CollectionView.swift */; };
 		D4C22EC8347F4BB1F74CB972 /* Pods_diis44.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A677F02A93CE5BF350D0DDE3 /* Pods_diis44.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,7 @@
 		64EA07C121A5BD8900C320AC /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		64EA07C321A5C05900C320AC /* settingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsTableViewCell.swift; sourceTree = "<group>"; };
 		64EA07C521A6134E00C320AC /* FeaturedCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCategoryVC.swift; sourceTree = "<group>"; };
+		64EA07C721A80A3E00C320AC /* Discover+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Discover+CollectionView.swift"; sourceTree = "<group>"; };
 		A677F02A93CE5BF350D0DDE3 /* Pods_diis44.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_diis44.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF3404D7F63899B7AD8B382C /* Pods-diis44.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-diis44.debug.xcconfig"; path = "Pods/Target Support Files/Pods-diis44/Pods-diis44.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,6 +159,7 @@
 				643B724E219DB5AA00DF867F /* Elements */,
 				64B99EB2215BFD550040E12A /* Cells */,
 				64B99E96215AF0780040E12A /* Discover.swift */,
+				64EA07C721A80A3E00C320AC /* Discover+CollectionView.swift */,
 				64B99EAB215BBC610040E12A /* TabBarController.swift */,
 				64B99EB5215C0B450040E12A /* CategoryVC.swift */,
 				642BBAFE215CD7D2000F32F4 /* BookVC.swift */,
@@ -314,6 +317,7 @@
 				"${BUILT_PRODUCTS_DIR}/FontBlaster/FontBlaster.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQWebViewController/JSQWebViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/MenuItemKit/MenuItemKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -339,6 +343,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontBlaster.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQWebViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MenuItemKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -368,6 +373,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				643B7254219F117500DF867F /* ReadingVC.swift in Sources */,
+				64EA07C821A80A3E00C320AC /* Discover+CollectionView.swift in Sources */,
 				64A1B2E1219CB6820095F6B3 /* popularStoriesCell.swift in Sources */,
 				64B99EB6215C0B450040E12A /* CategoryVC.swift in Sources */,
 				64B99E97215AF0780040E12A /* Discover.swift in Sources */,

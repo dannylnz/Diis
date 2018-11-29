@@ -170,7 +170,6 @@ extension SignUpVC{
         signInBtn.pulsate()
         let loginVC = LoginVC()
         loginVC.title = "Sign in"
-        loginVC.modalPresentationStyle = .overCurrentContext
         UINavigationBar.appearance().isHidden = true
         navigationController?.pushViewController(loginVC, animated: true)
     }

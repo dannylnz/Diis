@@ -22,6 +22,7 @@ class CategoryVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = CATEGORY_NAME
 
         downloadBooks { (success, response, error) in
             if success {

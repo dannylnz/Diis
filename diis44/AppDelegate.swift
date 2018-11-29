@@ -2,6 +2,7 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 import FirebaseAuth
+import Hero
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -9,14 +10,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
-        // Override point for customization after application launch.
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-        // Sets shadow (line below the bar) to a blank image
-        UINavigationBar.appearance().shadowImage = UIImage()
-        // Sets the translucent background color
-        UINavigationBar.appearance().backgroundColor = .clear
-        // Set translucent. (Default value is already true, so this can be removed if desired.)
-        UINavigationBar.appearance().tintColor = UIColor.lightGray
+
         FirebaseApp.configure()
         let db = Firestore.firestore()
         let settings = db.settings
@@ -25,10 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabBar = TabBarController()
         window = UIWindow(frame: UIScreen.main.bounds)
         let navigationController = UINavigationController(rootViewController: tabBar)
-        window?.rootViewController = navigationController
         navigationController.isNavigationBarHidden = true
+        window?.rootViewController = navigationController
+        UINavigationBar.appearance().tintColor = .lightGray
+        UINavigationBar.appearance().barTintColor = .white
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        UINavigationBar.appearance().isTranslucent = false
         window?.makeKeyAndVisible()
-        //
         //placeholder below : USER AUTH Guest
         let userDefaults = UserDefaults.standard
         if userDefaults.value(forKey: "appFirstTimeOpend") == nil {

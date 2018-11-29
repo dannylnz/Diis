@@ -14,7 +14,7 @@ class SettingsVC: UIViewController, UITableViewDelegate,UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Reading"
+        self.title = "Settings"
         setupSettingsTableView()
         checkIfUserIsLogged()
     }
@@ -39,7 +39,7 @@ extension SettingsVC {
     }
     func viewSetupGuest() {
         mainView.backgroundColor = UIColor.white
-        navigationController?.title = "Settings Guest"
+        navigationController?.title = "Settings"
         view.addSubview(mainView)
         mainView.snp.updateConstraints { (make) in
             make.top.equalTo(view.snp.top)

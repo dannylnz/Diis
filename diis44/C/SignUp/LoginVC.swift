@@ -20,6 +20,10 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         viewSetup()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
+    }
 }
 
 extension LoginVC {
@@ -34,15 +38,17 @@ extension LoginVC {
         }
         //label - already have an account?
         mainView.addSubview(welcomeBackLabel)
-        welcomeBackLabel.text = "Welcome back,\n sign in to continue"
-        welcomeBackLabel.textAlignment = .center
+        welcomeBackLabel.text = "Welcome back,\nsign in to continue."
+        welcomeBackLabel.textAlignment = .left
         welcomeBackLabel.font = UIFont(name: "BodoniSvtyTwoOSITCTT-Bold", size: 40.0)
         welcomeBackLabel.textColor = UIColor.black
+        welcomeBackLabel.numberOfLines = 0
         welcomeBackLabel.snp.makeConstraints { (make) in
-            make.height.greaterThanOrEqualTo(40)
-            make.width.greaterThanOrEqualTo(200)
+            make.height.greaterThanOrEqualTo(150)
+            make.width.equalTo(mainView.snp.width).offset(20)
             make.left.equalTo(mainView.snp.left).offset(10)
             make.top.equalTo(mainView.snp.top).offset(30)
+            welcomeBackLabel.sizeToFit()
         }
         //emailTF
         emailTF.font = signFont
@@ -81,13 +87,13 @@ extension LoginVC {
         //SignInBtn
         signInBtn.setTitle("Sign in", for: .normal)
         signInBtn.layer.cornerRadius = 6.0
-        signInBtn.backgroundColor = UIColor.init(rgb: 0x3b5998)
+        signInBtn.backgroundColor = UIColor.black
         signInBtn.addTarget(self, action: #selector(signInBtnClicked), for: .touchUpInside)
         mainView.addSubview(signInBtn)
         signInBtn.snp.makeConstraints { (make) in
             make.height.equalTo(36)
-            make.width.equalTo(200)
-            make.top.equalTo(passwordTF.snp.bottom).offset(6)
+            make.width.equalTo(240)
+            make.top.equalTo(passwordTF.snp.bottom).offset(12)
             make.centerX.equalTo(mainView.snp.centerX)
         }
         
@@ -110,7 +116,7 @@ extension LoginVC {
                 let tabBar = TabBarController()
                 self.reloadInputViews()
                 self.navigationController?.present(tabBar, animated: true, completion: nil)
-                self.showAlert(title: "User Login", message: "")
+                self.showAlert(title: "Sign in successful", message: "")
             }
         })
     }
